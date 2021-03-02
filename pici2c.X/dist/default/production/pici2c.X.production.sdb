@@ -1,0 +1,300 @@
+[p GLOBOPT AUTOSTATIC IEEE_DBL IEEE_FLT PIC14 PICREGULAR PICMID ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 16F887 ]
+[d frameptr 0 ]
+"5 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\__lldiv.c
+[v ___lldiv __lldiv `(ul  1 e 4 0 ]
+"505 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\doprnt.c
+[v _sprintf sprintf `(i  1 e 2 0 ]
+"10 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"4 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\Umul8_16.c
+[v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+"6 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\pic\__eeprom.c
+[v ___eecpymem __eecpymem `(v  1 e 1 0 ]
+"39
+[v ___memcpyee __memcpyee `(v  1 e 1 0 ]
+"18 D:\programacion\PIC\proyecto2_i2c_digital_2\pici2c.X\I2C.c
+[v _I2C_Master_Init I2C_Master_Init `(v  1 e 1 0 ]
+"33
+[v _I2C_Master_Wait I2C_Master_Wait `(v  1 e 1 0 ]
+"39
+[v _I2C_Master_Start I2C_Master_Start `(v  1 e 1 0 ]
+"53
+[v _I2C_Master_Stop I2C_Master_Stop `(v  1 e 1 0 ]
+"62
+[v _I2C_Master_Write I2C_Master_Write `(v  1 e 1 0 ]
+"70
+[v _I2C_Master_Read I2C_Master_Read `(us  1 e 2 0 ]
+"34 D:\programacion\PIC\proyecto2_i2c_digital_2\pici2c.X\main.c
+[v _main main `(v  1 e 1 0 ]
+"58 D:\programacion\PIC\proyecto2_i2c_digital_2\pici2c.X\MPU6050.c
+[v _confMPU confMPU `(v  1 e 1 0 ]
+"8 D:\programacion\PIC\proyecto2_i2c_digital_2\pici2c.X\UART.c
+[v _UARTInit UARTInit `(v  1 e 1 0 ]
+"39
+[v _UARTSendChar UARTSendChar `(v  1 e 1 0 ]
+"49
+[v _UARTSendString UARTSendString `(v  1 e 1 0 ]
+"60
+[v _UARTDataReady UARTDataReady `(uc  1 e 1 0 ]
+"68
+[v _UARTReadChar UARTReadChar `(uc  1 e 1 0 ]
+"166 D:/programas/mplab5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
+[v _PORTA PORTA `VEuc  1 e 1 @5 ]
+[s S352 . 1 `uc 1 TMR1IF 1 0 :1:0 
+`uc 1 TMR2IF 1 0 :1:1 
+`uc 1 CCP1IF 1 0 :1:2 
+`uc 1 SSPIF 1 0 :1:3 
+`uc 1 TXIF 1 0 :1:4 
+`uc 1 RCIF 1 0 :1:5 
+`uc 1 ADIF 1 0 :1:6 
+]
+"553
+[u S360 . 1 `S352 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES360  1 e 1 @12 ]
+"843
+[v _SSPBUF SSPBUF `VEuc  1 e 1 @19 ]
+"850
+[v _SSPCON SSPCON `VEuc  1 e 1 @20 ]
+[s S295 . 1 `uc 1 RX9D 1 0 :1:0 
+`uc 1 OERR 1 0 :1:1 
+`uc 1 FERR 1 0 :1:2 
+`uc 1 ADDEN 1 0 :1:3 
+`uc 1 CREN 1 0 :1:4 
+`uc 1 SREN 1 0 :1:5 
+`uc 1 RX9 1 0 :1:6 
+`uc 1 SPEN 1 0 :1:7 
+]
+"1068
+[s S304 . 1 `uc 1 RCD8 1 0 :1:0 
+`uc 1 . 1 0 :5:1 
+`uc 1 RC9 1 0 :1:6 
+]
+[s S308 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 nRC8 1 0 :1:6 
+]
+[s S311 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 RC8_9 1 0 :1:6 
+]
+[u S314 . 1 `S295 1 . 1 0 `S304 1 . 1 0 `S308 1 . 1 0 `S311 1 . 1 0 ]
+[v _RCSTAbits RCSTAbits `VES314  1 e 1 @24 ]
+"1133
+[v _TXREG TXREG `VEuc  1 e 1 @25 ]
+"1140
+[v _RCREG RCREG `VEuc  1 e 1 @26 ]
+"1416
+[v _TRISA TRISA `VEuc  1 e 1 @133 ]
+[s S114 . 1 `uc 1 TRISC0 1 0 :1:0 
+`uc 1 TRISC1 1 0 :1:1 
+`uc 1 TRISC2 1 0 :1:2 
+`uc 1 TRISC3 1 0 :1:3 
+`uc 1 TRISC4 1 0 :1:4 
+`uc 1 TRISC5 1 0 :1:5 
+`uc 1 TRISC6 1 0 :1:6 
+`uc 1 TRISC7 1 0 :1:7 
+]
+"1557
+[u S123 . 1 `S114 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES123  1 e 1 @135 ]
+"1979
+[v _SSPCON2 SSPCON2 `VEuc  1 e 1 @145 ]
+[s S136 . 1 `uc 1 SEN 1 0 :1:0 
+`uc 1 RSEN 1 0 :1:1 
+`uc 1 PEN 1 0 :1:2 
+`uc 1 RCEN 1 0 :1:3 
+`uc 1 ACKEN 1 0 :1:4 
+`uc 1 ACKDT 1 0 :1:5 
+`uc 1 ACKSTAT 1 0 :1:6 
+`uc 1 GCEN 1 0 :1:7 
+]
+"1996
+[u S145 . 1 `S136 1 . 1 0 ]
+[v _SSPCON2bits SSPCON2bits `VES145  1 e 1 @145 ]
+"2048
+[v _SSPADD SSPADD `VEuc  1 e 1 @147 ]
+"2177
+[v _SSPSTAT SSPSTAT `VEuc  1 e 1 @148 ]
+[s S23 . 1 `uc 1 BF 1 0 :1:0 
+`uc 1 UA 1 0 :1:1 
+`uc 1 R_nW 1 0 :1:2 
+`uc 1 S 1 0 :1:3 
+`uc 1 P 1 0 :1:4 
+`uc 1 D_nA 1 0 :1:5 
+`uc 1 CKE 1 0 :1:6 
+`uc 1 SMP 1 0 :1:7 
+]
+"2231
+[s S32 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 R 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 D 1 0 :1:5 
+]
+[s S37 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 I2C_READ 1 0 :1:2 
+`uc 1 I2C_START 1 0 :1:3 
+`uc 1 I2C_STOP 1 0 :1:4 
+`uc 1 I2C_DATA 1 0 :1:5 
+]
+[s S43 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 nW 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 nA 1 0 :1:5 
+]
+[s S48 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 nWRITE 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 nADDRESS 1 0 :1:5 
+]
+[s S53 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 R_W 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 D_A 1 0 :1:5 
+]
+[s S58 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 READ_WRITE 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 DATA_ADDRESS 1 0 :1:5 
+]
+[u S63 . 1 `S23 1 . 1 0 `S32 1 . 1 0 `S37 1 . 1 0 `S43 1 . 1 0 `S48 1 . 1 0 `S53 1 . 1 0 `S58 1 . 1 0 ]
+[v _SSPSTATbits SSPSTATbits `VES63  1 e 1 @148 ]
+[s S258 . 1 `uc 1 TX9D 1 0 :1:0 
+`uc 1 TRMT 1 0 :1:1 
+`uc 1 BRGH 1 0 :1:2 
+`uc 1 SENDB 1 0 :1:3 
+`uc 1 SYNC 1 0 :1:4 
+`uc 1 TXEN 1 0 :1:5 
+`uc 1 TX9 1 0 :1:6 
+`uc 1 CSRC 1 0 :1:7 
+]
+"2582
+[s S267 . 1 `uc 1 TXD8 1 0 :1:0 
+`uc 1 . 1 0 :5:1 
+`uc 1 nTX8 1 0 :1:6 
+]
+[s S271 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 TX8_9 1 0 :1:6 
+]
+[u S274 . 1 `S258 1 . 1 0 `S267 1 . 1 0 `S271 1 . 1 0 ]
+[v _TXSTAbits TXSTAbits `VES274  1 e 1 @152 ]
+"2642
+[v _SPBRG SPBRG `VEuc  1 e 1 @153 ]
+"3387
+[v _ANSEL ANSEL `VEuc  1 e 1 @392 ]
+"3896
+[v _GIE GIE `VEb  1 e 0 @95 ]
+"4040
+[v _PEIE PEIE `VEb  1 e 0 @94 ]
+"4274
+[v _SSPIE SSPIE `VEb  1 e 0 @1123 ]
+"4277
+[v _SSPIF SSPIF `VEb  1 e 0 @99 ]
+"4457
+[v _TRISC3 TRISC3 `VEb  1 e 0 @1083 ]
+"4460
+[v _TRISC4 TRISC4 `VEb  1 e 0 @1084 ]
+"34 D:\programacion\PIC\proyecto2_i2c_digital_2\pici2c.X\main.c
+[v _main main `(v  1 e 1 0 ]
+{
+"54
+[v main@valor valor `i  1 a 2 26 ]
+"39
+[v main@buffer buffer `[15]uc  1 a 15 11 ]
+"64
+} 0
+"505 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\doprnt.c
+[v _sprintf sprintf `(i  1 e 2 0 ]
+{
+[v sprintf@sp sp `*.4uc  1 a 1 wreg ]
+"512
+[v sprintf@c c `uc  1 a 1 5 ]
+"507
+[v sprintf@ap ap `[1]*.1v  1 a 1 4 ]
+"505
+[v sprintf@sp sp `*.4uc  1 a 1 wreg ]
+[v sprintf@f f `*.24DCuc  1 p 1 0 ]
+"550
+[v sprintf@sp sp `*.4uc  1 a 1 6 ]
+"1567
+} 0
+"58 D:\programacion\PIC\proyecto2_i2c_digital_2\pici2c.X\MPU6050.c
+[v _confMPU confMPU `(v  1 e 1 0 ]
+{
+"106
+} 0
+"62 D:\programacion\PIC\proyecto2_i2c_digital_2\pici2c.X\I2C.c
+[v _I2C_Master_Write I2C_Master_Write `(v  1 e 1 0 ]
+{
+[v I2C_Master_Write@d d `ui  1 p 2 0 ]
+"65
+} 0
+"53
+[v _I2C_Master_Stop I2C_Master_Stop `(v  1 e 1 0 ]
+{
+"56
+} 0
+"39
+[v _I2C_Master_Start I2C_Master_Start `(v  1 e 1 0 ]
+{
+"42
+} 0
+"49 D:\programacion\PIC\proyecto2_i2c_digital_2\pici2c.X\UART.c
+[v _UARTSendString UARTSendString `(v  1 e 1 0 ]
+{
+[v UARTSendString@str str `*.4DCuc  1 a 1 wreg ]
+"50
+[v UARTSendString@i i `i  1 a 2 4 ]
+"49
+[v UARTSendString@str str `*.4DCuc  1 a 1 wreg ]
+[v UARTSendString@max_length max_length `DCuc  1 p 1 1 ]
+[v UARTSendString@str str `*.4DCuc  1 a 1 3 ]
+"54
+} 0
+"39
+[v _UARTSendChar UARTSendChar `(v  1 e 1 0 ]
+{
+[v UARTSendChar@c c `DCuc  1 a 1 wreg ]
+[v UARTSendChar@c c `DCuc  1 a 1 wreg ]
+[v UARTSendChar@c c `DCuc  1 a 1 0 ]
+"42
+} 0
+"8
+[v _UARTInit UARTInit `(v  1 e 1 0 ]
+{
+[v UARTInit@baud_rate baud_rate `DCul  1 p 4 0 ]
+[v UARTInit@BRGH BRGH `DCuc  1 p 1 4 ]
+"33
+} 0
+"70 D:\programacion\PIC\proyecto2_i2c_digital_2\pici2c.X\I2C.c
+[v _I2C_Master_Read I2C_Master_Read `(us  1 e 2 0 ]
+{
+"71
+[v I2C_Master_Read@temp temp `us  1 a 2 4 ]
+"70
+[v I2C_Master_Read@a a `us  1 p 2 0 ]
+"81
+} 0
+"33
+[v _I2C_Master_Wait I2C_Master_Wait `(v  1 e 1 0 ]
+{
+"35
+} 0
+"18
+[v _I2C_Master_Init I2C_Master_Init `(v  1 e 1 0 ]
+{
+[v I2C_Master_Init@c c `DCul  1 p 4 0 ]
+"25
+} 0
+"5 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\__lldiv.c
+[v ___lldiv __lldiv `(ul  1 e 4 0 ]
+{
+"10
+[v ___lldiv@quotient quotient `ul  1 a 4 9 ]
+"11
+[v ___lldiv@counter counter `uc  1 a 1 13 ]
+"5
+[v ___lldiv@divisor divisor `ul  1 p 4 0 ]
+[v ___lldiv@dividend dividend `ul  1 p 4 4 ]
+"30
+} 0
