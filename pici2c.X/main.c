@@ -32,33 +32,67 @@
 
 
 void main(void) {
+    __delay_ms(1000);
     ANSEL = 0;
     TRISA = 0;
     PORTA = 0;
-    int datos[7]; //enteros con signo
-    char buffer[15];
+    char buffer[25];
     //int estado;
-    I2C_Master_Init(100000L);
-    UARTInit(9600, 1);
-    confMPU(); //configuracion
-      
+    I2C_Master_Init();
+    UARTInit(9600,1);
+    uint8_t val= 1;
+    confMPU();
+    char valores[8];
+    int valorx,valory,valorz,temp;
     while(1){
-        PORTA = ~PORTA;
-        I2C_Master_Start();
-        I2C_Master_Write(0xD1);//lectura
-        I2C_Master_Write(0x75);
+        I2C_Start(0xD0);
+        while(SSPCON2bits.ACKSTAT);
+        I2C_Master_Write(0x3B);
+        while(SSPCON2bits.ACKSTAT);        
+//        while(SSPCON2bits.ACKSTAT);
+//        I2C_Master_RepeatedStart();
+//        I2C_Master_Write(0xD1);
+//        while(SSPCON2bits.ACKSTAT);
+//        valores[0] = I2C_Read(1);
+//        I2C_Master_Stop();
+//        
+//        I2C_Start(0xD0);
+//        while(SSPCON2bits.ACKSTAT);
+//        I2C_Master_Write(0x3B);
+//        while(SSPCON2bits.ACKSTAT);
+//        I2C_Master_RepeatedStart();
+//        I2C_Master_Write(0xD1);
+//        while(SSPCON2bits.ACKSTAT);
+//        valores[1] = I2C_Read(1);
+//        I2C_Master_Stop();
+//        
+        I2C_Start(0xD0);
+        while(SSPCON2bits.ACKSTAT);
+        I2C_Master_Write(0x3B);
+        while(SSPCON2bits.ACKSTAT);
+        I2C_Master_RepeatedStart();
+        I2C_Master_Write(0xD1);
+        for (int i= 0; i<7;i++) valores[i] = I2C_Read(0);
+        valores[7] = I2C_Read(1);
         I2C_Master_Stop();
-        
-        I2C_Master_Start();
-        I2C_Master_Write(0xD0);
-        int valor = I2C_Master_Read(1);
-        I2C_Master_Stop();
-        
-        sprintf(buffer,"Dir: %b",valor);
-        
-        UARTSendString(buffer, 15);
+//        //-------------------------
+//        
+        valorx = ((int) valores[0] << 8  ) | ((int) valores[1] );
+        valory = ((int) valores[2] << 8  ) | ((int) valores[3] );
+        valorz = ((int) valores[4] << 8  ) | ((int) valores[5] );
+        temp = ((int) valores[6] << 8  ) | ((int) valores[7] );
+        sprintf(buffer,"Ax: %i ",valorx);
+        UARTSendString(buffer,15);
+        sprintf(buffer,"Ay: %i ",valory);
+        UARTSendString(buffer,15);
+        sprintf(buffer,"Az: %i ",valorz);
+        UARTSendString(buffer,15);
+        sprintf(buffer,"Temp: %i ",temp);
+        UARTSendString(buffer,15);
         UARTSendChar('\n');
-        __delay_ms(100);
+        __delay_ms(250);
+        val++;
+        
     }
     return;
 }

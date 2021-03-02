@@ -35,13 +35,13 @@ void readMPU(int* guardar) {
     I2C_Master_Start();
     I2C_Master_Write(0xE8); // direccion del sensor, con modo lectura
 
-    valores[0] = ((int) I2C_Master_Read(0) << 8) | (int) I2C_Master_Read(0);
-    valores[1] = ((int) I2C_Master_Read(0) << 8) | (int) I2C_Master_Read(0);
-    valores[2] = ((int) I2C_Master_Read(0) << 8) | (int) I2C_Master_Read(0);
-    valores[3] = ((int) I2C_Master_Read(0) << 8) | (int) I2C_Master_Read(0);
-    valores[4] = ((int) I2C_Master_Read(0) << 8) | (int) I2C_Master_Read(0);
-    valores[5] = ((int) I2C_Master_Read(0) << 8) | (int) I2C_Master_Read(0);
-    valores[6] = ((int) I2C_Master_Read(0) << 8) | (int) I2C_Master_Read(1);
+//    valores[0] = ((int) I2C_Master_Read(0) << 8) | (int) I2C_Master_Read(0);
+//    valores[1] = ((int) I2C_Master_Read(0) << 8) | (int) I2C_Master_Read(0);
+//    valores[2] = ((int) I2C_Master_Read(0) << 8) | (int) I2C_Master_Read(0);
+//    valores[3] = ((int) I2C_Master_Read(0) << 8) | (int) I2C_Master_Read(0);
+//    valores[4] = ((int) I2C_Master_Read(0) << 8) | (int) I2C_Master_Read(0);
+//    valores[5] = ((int) I2C_Master_Read(0) << 8) | (int) I2C_Master_Read(0);
+//    valores[6] = ((int) I2C_Master_Read(0) << 8) | (int) I2C_Master_Read(1);
 
     I2C_Master_Stop(); // fin de la comunicacion 
     // despues se convierten a sus valores fisicos
@@ -56,42 +56,44 @@ void readMPU(int* guardar) {
 }
 
 void confMPU() {
-
+    
     I2C_Master_Start();
-    I2C_Master_Write(0x68); //direccion del mpu6050 para escritura,
+    I2C_Master_Write(0xD0); //direccion del mpu6050 para escritura,
+    I2C_Master_Write(0x6B); // power managment 1 
+    I2C_Master_Write(0x01); //giroscopio en x referencia  
+    I2C_Master_Stop();
+    
+    I2C_Master_Start();
+    I2C_Master_Write(0xD0); //direccion del mpu6050 para escritura,
     I2C_Master_Write(0x00); //  Sample rate
     I2C_Master_Stop();
 
 
     I2C_Master_Start();
-    I2C_Master_Write(0x68); //direccion del mpu6050 para escritura,
+    I2C_Master_Write(0xD0); //direccion del mpu6050 para escritura,
     I2C_Master_Write(0x19); //  Sample rate
     I2C_Master_Write(0x08); //1 khz de muestreo
     I2C_Master_Stop();
 
     I2C_Master_Start();
-    I2C_Master_Write(0x68); //direccion del mpu6050 para escritura,
+    I2C_Master_Write(0xD0); //direccion del mpu6050 para escritura,
     I2C_Master_Write(0x1A); //CONFIG
     I2C_Master_Write(0x00); //externo deshabilitado, y frecuencia int 8khz 
     I2C_Master_Stop();
 
     I2C_Master_Start();
-    I2C_Master_Write(0x68); //direccion del mpu6050 para escritura,
+    I2C_Master_Write(0xD0); //direccion del mpu6050 para escritura,
     I2C_Master_Write(0x1B); //gyro conf
     I2C_Master_Write(0x00); //+- 250 grados/s self test of
     I2C_Master_Stop();
 
     I2C_Master_Start();
-    I2C_Master_Write(0x68); //direccion del mpu6050 para escritura,
+    I2C_Master_Write(0xD0); //direccion del mpu6050 para escritura,
     I2C_Master_Write(0x1C); // accel conf 
     I2C_Master_Write(0x00); //+-2g y self test of 
     I2C_Master_Stop();
 
-    I2C_Master_Start();
-    I2C_Master_Write(0x68); //direccion del mpu6050 para escritura,
-    I2C_Master_Write(0x6B); // power managment 1 
-    I2C_Master_Write(0x01); //giroscopio en x referencia  
-    I2C_Master_Stop();
+
 
     I2C_Master_Start();
     I2C_Master_Write(0x68); //direccion del mpu6050 para escritura,

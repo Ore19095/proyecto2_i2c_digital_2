@@ -2635,46 +2635,18 @@ typedef uint16_t uintptr_t;
 # 15 "./MPU6050.h" 2
 
 # 1 "./I2C.h" 1
-# 19 "./I2C.h"
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
-# 19 "./I2C.h" 2
-# 28 "./I2C.h"
-void I2C_Master_Init(const unsigned long c);
-
-
-
-
-
-
-
-void I2C_Master_Wait(void);
-
-
-
-void I2C_Master_Start(void);
-
-
-
-void I2C_Master_RepeatedStart(void);
-
-
-
-void I2C_Master_Stop(void);
-
-
-
-
-
-void I2C_Master_Write(unsigned d);
-
-
-
-
-unsigned short I2C_Master_Read(unsigned short a);
-
-
-
-void I2C_Slave_Init(uint8_t address);
+# 16 "./I2C.h"
+void I2C_Master_Init();
+void I2C_Master_Wait();
+void I2C_Master_Start();
+void I2C_Start(char add);
+void I2C_Master_RepeatedStart();
+void I2C_Master_Stop();
+void I2C_ACK();
+void I2C_NACK();
+unsigned char I2C_Master_Write(unsigned char data);
+unsigned char I2C_Read_Byte();
+unsigned char I2C_Read(unsigned char);
 # 16 "./MPU6050.h" 2
 
 
@@ -2694,15 +2666,7 @@ void readMPU(int* guardar) {
 
     I2C_Master_Start();
     I2C_Master_Write(0xE8);
-
-    valores[0] = ((int) I2C_Master_Read(0) << 8) | (int) I2C_Master_Read(0);
-    valores[1] = ((int) I2C_Master_Read(0) << 8) | (int) I2C_Master_Read(0);
-    valores[2] = ((int) I2C_Master_Read(0) << 8) | (int) I2C_Master_Read(0);
-    valores[3] = ((int) I2C_Master_Read(0) << 8) | (int) I2C_Master_Read(0);
-    valores[4] = ((int) I2C_Master_Read(0) << 8) | (int) I2C_Master_Read(0);
-    valores[5] = ((int) I2C_Master_Read(0) << 8) | (int) I2C_Master_Read(0);
-    valores[6] = ((int) I2C_Master_Read(0) << 8) | (int) I2C_Master_Read(1);
-
+# 46 "MPU6050.c"
     I2C_Master_Stop();
 
 
@@ -2718,40 +2682,42 @@ void readMPU(int* guardar) {
 void confMPU() {
 
     I2C_Master_Start();
-    I2C_Master_Write(0x68);
+    I2C_Master_Write(0xD0);
+    I2C_Master_Write(0x6B);
+    I2C_Master_Write(0x01);
+    I2C_Master_Stop();
+
+    I2C_Master_Start();
+    I2C_Master_Write(0xD0);
     I2C_Master_Write(0x00);
     I2C_Master_Stop();
 
 
     I2C_Master_Start();
-    I2C_Master_Write(0x68);
+    I2C_Master_Write(0xD0);
     I2C_Master_Write(0x19);
     I2C_Master_Write(0x08);
     I2C_Master_Stop();
 
     I2C_Master_Start();
-    I2C_Master_Write(0x68);
+    I2C_Master_Write(0xD0);
     I2C_Master_Write(0x1A);
     I2C_Master_Write(0x00);
     I2C_Master_Stop();
 
     I2C_Master_Start();
-    I2C_Master_Write(0x68);
+    I2C_Master_Write(0xD0);
     I2C_Master_Write(0x1B);
     I2C_Master_Write(0x00);
     I2C_Master_Stop();
 
     I2C_Master_Start();
-    I2C_Master_Write(0x68);
+    I2C_Master_Write(0xD0);
     I2C_Master_Write(0x1C);
     I2C_Master_Write(0x00);
     I2C_Master_Stop();
 
-    I2C_Master_Start();
-    I2C_Master_Write(0x68);
-    I2C_Master_Write(0x6B);
-    I2C_Master_Write(0x01);
-    I2C_Master_Stop();
+
 
     I2C_Master_Start();
     I2C_Master_Write(0x68);

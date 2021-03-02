@@ -302,6 +302,13 @@ extern double round(double);
 
 
 #pragma warning disable 350
+# 358 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\sources\\c90\\common\\doprnt.c"
+const static unsigned int dpowers[] = {1, 10, 100, 1000, 10000,
+
+
+
+
+        };
 # 463 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\sources\\c90\\common\\doprnt.c"
 int
 # 505 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\sources\\c90\\common\\doprnt.c"
@@ -335,20 +342,83 @@ sprintf(char * sp, const char * f, ...)
 
  while((c = *f++)) {
 
-
+  if(c != '%')
 
   {
    ((*sp++ = (c)));
    continue;
   }
+
+
+
+
+  flag = 0;
+# 661 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\sources\\c90\\common\\doprnt.c"
+  switch(c = *f++) {
+
+  case 0:
+   goto alldone;
+# 723 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\sources\\c90\\common\\doprnt.c"
+  case 'd':
+  case 'i':
+   break;
+# 828 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\sources\\c90\\common\\doprnt.c"
+  default:
+# 839 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\sources\\c90\\common\\doprnt.c"
+   continue;
+# 848 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\sources\\c90\\common\\doprnt.c"
+  }
+# 1279 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\sources\\c90\\common\\doprnt.c"
+  {
+
+
+
+
+
+    val = (unsigned int)(*(int *)__va_arg((*(int **)ap), (int)0));
+
+   if((int)val < 0) {
+    flag |= 0x03;
+    val = -val;
+   }
+
+  }
+# 1331 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\sources\\c90\\common\\doprnt.c"
+   for(c = 1 ; c != sizeof dpowers/sizeof dpowers[0] ; c++)
+    if(val < dpowers[c])
+     break;
 # 1448 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\sources\\c90\\common\\doprnt.c"
   {
+# 1464 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\sources\\c90\\common\\doprnt.c"
+   if(flag & 0x03)
+    ((*sp++ = ('-')));
 # 1495 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\sources\\c90\\common\\doprnt.c"
   }
-# 1559 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\sources\\c90\\common\\doprnt.c"
+
+
+  prec = c;
+
+  while(prec--) {
+
+
+
+   {
+# 1515 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\sources\\c90\\common\\doprnt.c"
+    c = (val / dpowers[(unsigned char)prec]) % 10 + '0';
+# 1549 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\sources\\c90\\common\\doprnt.c"
+   }
+   ((*sp++ = (c)));
+  }
+
+
+
+
+
+
+
  }
 
-
+alldone:
 
 
  *sp = 0;

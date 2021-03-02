@@ -2750,46 +2750,18 @@ extern int printf(const char *, ...);
 # 28 "main.c" 2
 
 # 1 "./I2C.h" 1
-# 19 "./I2C.h"
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
-# 19 "./I2C.h" 2
-# 28 "./I2C.h"
-void I2C_Master_Init(const unsigned long c);
-
-
-
-
-
-
-
-void I2C_Master_Wait(void);
-
-
-
-void I2C_Master_Start(void);
-
-
-
-void I2C_Master_RepeatedStart(void);
-
-
-
-void I2C_Master_Stop(void);
-
-
-
-
-
-void I2C_Master_Write(unsigned d);
-
-
-
-
-unsigned short I2C_Master_Read(unsigned short a);
-
-
-
-void I2C_Slave_Init(uint8_t address);
+# 16 "./I2C.h"
+void I2C_Master_Init();
+void I2C_Master_Wait();
+void I2C_Master_Start();
+void I2C_Start(char add);
+void I2C_Master_RepeatedStart();
+void I2C_Master_Stop();
+void I2C_ACK();
+void I2C_NACK();
+unsigned char I2C_Master_Write(unsigned char data);
+unsigned char I2C_Read_Byte();
+unsigned char I2C_Read(unsigned char);
 # 29 "main.c" 2
 
 # 1 "./UART.h" 1
@@ -2850,33 +2822,51 @@ void readMPU(int*);
 
 
 void main(void) {
+    _delay((unsigned long)((1000)*(4000000/4000.0)));
     ANSEL = 0;
     TRISA = 0;
     PORTA = 0;
-    int datos[7];
-    char buffer[15];
+    char buffer[25];
 
-    I2C_Master_Init(100000L);
-    UARTInit(9600, 1);
+    I2C_Master_Init();
+    UARTInit(9600,1);
+    uint8_t val= 1;
     confMPU();
-
+    char valores[8];
+    int valorx,valory,valorz,temp;
     while(1){
-        PORTA = ~PORTA;
-        I2C_Master_Start();
+        I2C_Start(0xD0);
+        while(SSPCON2bits.ACKSTAT);
+        I2C_Master_Write(0x3B);
+        while(SSPCON2bits.ACKSTAT);
+# 69 "main.c"
+        I2C_Start(0xD0);
+        while(SSPCON2bits.ACKSTAT);
+        I2C_Master_Write(0x3B);
+        while(SSPCON2bits.ACKSTAT);
+        I2C_Master_RepeatedStart();
         I2C_Master_Write(0xD1);
-        I2C_Master_Write(0x75);
+        for (int i= 0; i<7;i++) valores[i] = I2C_Read(0);
+        valores[7] = I2C_Read(1);
         I2C_Master_Stop();
 
-        I2C_Master_Start();
-        I2C_Master_Write(0xD0);
-        int valor = I2C_Master_Read(1);
-        I2C_Master_Stop();
 
-        sprintf(buffer,"Dir: %b",valor);
-
-        UARTSendString(buffer, 15);
+        valorx = ((int) valores[0] << 8 ) | ((int) valores[1] );
+        valory = ((int) valores[2] << 8 ) | ((int) valores[3] );
+        valorz = ((int) valores[4] << 8 ) | ((int) valores[5] );
+        temp = ((int) valores[6] << 8 ) | ((int) valores[7] );
+        sprintf(buffer,"Ax: %i ",valorx);
+        UARTSendString(buffer,15);
+        sprintf(buffer,"Ay: %i ",valory);
+        UARTSendString(buffer,15);
+        sprintf(buffer,"Az: %i ",valorz);
+        UARTSendString(buffer,15);
+        sprintf(buffer,"Temp: %i ",temp);
+        UARTSendString(buffer,15);
         UARTSendChar('\n');
-        _delay((unsigned long)((100)*(4000000/4000.0)));
+        _delay((unsigned long)((250)*(4000000/4000.0)));
+        val++;
+
     }
     return;
 }
