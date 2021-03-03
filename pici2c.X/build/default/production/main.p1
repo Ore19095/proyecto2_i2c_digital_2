@@ -10,26 +10,68 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;D:/programas/mplab5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 166: extern volatile unsigned char PORTA __attribute__((address(0x005)));
 [v _PORTA `Vuc ~T0 @X0 0 e@5 ]
 "17 ./I2C.h
-[; ;./I2C.h: 17: void I2C_Master_Init(void);
-[v _I2C_Master_Init `(v ~T0 @X0 0 ef ]
+[; ;./I2C.h: 17: void I2C_Master_Init();
+[v _I2C_Master_Init `(v ~T0 @X0 0 e? ]
 "31 ./UART.h
 [; ;./UART.h: 31: void UARTInit(const uint32_t baud_rate, const uint8_t BRGH);
 [v _UARTInit `(v ~T0 @X0 0 ef2`Cul`Cuc ]
 "20 ./MPU6050.h
 [; ;./MPU6050.h: 20: void confMPU(void);
 [v _confMPU `(v ~T0 @X0 0 ef ]
-"34
+"465 D:/programas/mplab5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
+[; ;D:/programas/mplab5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 465:     struct {
+[s S16 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S16 . RBIF INTF T0IF RBIE INTE T0IE PEIE GIE ]
+"475
+[; ;D:/programas/mplab5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 475:     struct {
+[s S17 :2 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 ]
+[n S17 . . TMR0IF . TMR0IE ]
+"464
+[; ;D:/programas/mplab5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 464: typedef union {
+[u S15 `S16 1 `S17 1 ]
+[n S15 . . . ]
+"482
+[; ;D:/programas/mplab5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 482: extern volatile INTCONbits_t INTCONbits __attribute__((address(0x00B)));
+[v _INTCONbits `VS15 ~T0 @X0 0 e@11 ]
+"1708
+[; ;D:/programas/mplab5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1708:     struct {
+[s S63 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S63 . TMR1IE TMR2IE CCP1IE SSPIE TXIE RCIE ADIE ]
+"1707
+[; ;D:/programas/mplab5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1707: typedef union {
+[u S62 `S63 1 ]
+[n S62 . . ]
+"1718
+[; ;D:/programas/mplab5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1718: extern volatile PIE1bits_t PIE1bits __attribute__((address(0x08C)));
+[v _PIE1bits `VS62 ~T0 @X0 0 e@140 ]
+"34 ./MPU6050.h
 [; ;./MPU6050.h: 34: void readMPU(float*);
 [v _readMPU `(v ~T0 @X0 0 ef1`*f ]
-"44 ./UART.h
-[; ;./UART.h: 44: void UARTSendString(const char* str, const uint8_t max_length);
-[v _UARTSendString `(v ~T0 @X0 0 ef2`*Cuc`Cuc ]
 "122 C:\Program Files\Microchip\xc8\v2.31\pic\include\c90\stdlib.h
 [; ;C:\Program Files\Microchip\xc8\v2.31\pic\include\c90\stdlib.h: 122: extern char * ftoa(float f, int * status);
 [v _ftoa `(*uc ~T0 @X0 0 ef2`f`*i ]
-"37 ./UART.h
+"44 ./UART.h
+[; ;./UART.h: 44: void UARTSendString(const char* str, const uint8_t max_length);
+[v _UARTSendString `(v ~T0 @X0 0 ef2`*Cuc`Cuc ]
+"37
 [; ;./UART.h: 37: void UARTSendChar(const char c);
 [v _UARTSendChar `(v ~T0 @X0 0 ef1`Cuc ]
+[t ~ __interrupt . k ]
+[t T1 __interrupt ]
+"543 D:/programas/mplab5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
+[; ;D:/programas/mplab5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 543:     struct {
+[s S19 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S19 . TMR1IF TMR2IF CCP1IF SSPIF TXIF RCIF ADIF ]
+"542
+[; ;D:/programas/mplab5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 542: typedef union {
+[u S18 `S19 1 ]
+[n S18 . . ]
+"553
+[; ;D:/programas/mplab5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 553: extern volatile PIR1bits_t PIR1bits __attribute__((address(0x00C)));
+[v _PIR1bits `VS18 ~T0 @X0 0 e@12 ]
+"1140
+[; ;D:/programas/mplab5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1140: extern volatile unsigned char RCREG __attribute__((address(0x01A)));
+[v _RCREG `Vuc ~T0 @X0 0 e@26 ]
 "8 main.c
 [p x FOSC  =  INTRC_NOCLKOUT ]
 "9
@@ -288,8 +330,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 "3546
 [; ;D:/programas/mplab5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 3546: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
+"34 main.c
+[; ;main.c: 34: volatile char datoRecibido;
+[v _datoRecibido `Vuc ~T0 @X0 1 e ]
+"35
+[; ;main.c: 35: volatile uint8_t bandera;
+[v _bandera `Vuc ~T0 @X0 1 e ]
 [v $root$_main `(v ~T0 @X0 0 e ]
-"37 main.c
+"37
 [; ;main.c: 37: void main(void) {
 [v _main `(v ~T0 @X0 1 ef ]
 {
@@ -319,6 +367,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 "46
 [; ;main.c: 46:     confMPU();
 [e ( _confMPU ..  ]
+"48
+[; ;main.c: 48:     INTCONbits.GIE = 1;
+[e = . . _INTCONbits 0 7 -> -> 1 `i `uc ]
+"49
+[; ;main.c: 49:     INTCONbits.PEIE = 1;
+[e = . . _INTCONbits 0 6 -> -> 1 `i `uc ]
+"50
+[; ;main.c: 50:     PIE1bits.RCIE = 1;
+[e = . . _PIE1bits 0 5 -> -> 1 `i `uc ]
 "51
 [; ;main.c: 51:     int status;
 [v _status `i ~T0 @X0 1 a ]
@@ -333,95 +390,127 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 54:         readMPU(datos);
 [e ( _readMPU (1 &U _datos ]
 "57
-[; ;main.c: 57:         UARTSendString("hola a todos\n",13);
-[e ( _UARTSendString (2 , :s 1C -> -> 13 `i `uc ]
+[; ;main.c: 57:         bandera = 0;
+[e = _bandera -> -> 0 `i `uc ]
 "58
-[; ;main.c: 58:         PORTA = ~PORTA;
-[e = _PORTA -> ~ -> _PORTA `i `uc ]
-"59
-[; ;main.c: 59:         buffer = ftoa(datos[0], status);
+[; ;main.c: 58:         buffer = ftoa(datos[0], status);
 [e = _buffer ( _ftoa (2 , *U + &U _datos * -> -> -> 0 `i `ui `ux -> -> # *U &U _datos `ui `ux -> _status `*i ]
+"59
+[; ;main.c: 59:         UARTSendString(" ", 10);
+[e ( _UARTSendString (2 , :s 1C -> -> 10 `i `uc ]
 "60
-[; ;main.c: 60:         UARTSendString(" ", 10);
-[e ( _UARTSendString (2 , :s 2C -> -> 10 `i `uc ]
-"61
-[; ;main.c: 61:         UARTSendString(buffer, 6);
+[; ;main.c: 60:         UARTSendString(buffer, 6);
 [e ( _UARTSendString (2 , -> _buffer `*Cuc -> -> 6 `i `uc ]
-"63
-[; ;main.c: 63:         buffer = ftoa(datos[1], status);
+"62
+[; ;main.c: 62:         buffer = ftoa(datos[1], status);
 [e = _buffer ( _ftoa (2 , *U + &U _datos * -> -> -> 1 `i `ui `ux -> -> # *U &U _datos `ui `ux -> _status `*i ]
+"63
+[; ;main.c: 63:         UARTSendString(" ", 10);
+[e ( _UARTSendString (2 , :s 2C -> -> 10 `i `uc ]
 "64
-[; ;main.c: 64:         UARTSendString(" ", 10);
-[e ( _UARTSendString (2 , :s 3C -> -> 10 `i `uc ]
-"65
-[; ;main.c: 65:         UARTSendString(buffer, 6);
+[; ;main.c: 64:         UARTSendString(buffer, 6);
 [e ( _UARTSendString (2 , -> _buffer `*Cuc -> -> 6 `i `uc ]
-"67
-[; ;main.c: 67:         buffer = ftoa(datos[2], status);
+"66
+[; ;main.c: 66:         buffer = ftoa(datos[2], status);
 [e = _buffer ( _ftoa (2 , *U + &U _datos * -> -> -> 2 `i `ui `ux -> -> # *U &U _datos `ui `ux -> _status `*i ]
+"67
+[; ;main.c: 67:         UARTSendString(" ", 6);
+[e ( _UARTSendString (2 , :s 3C -> -> 6 `i `uc ]
 "68
-[; ;main.c: 68:         UARTSendString(" ", 6);
-[e ( _UARTSendString (2 , :s 4C -> -> 6 `i `uc ]
-"69
-[; ;main.c: 69:         UARTSendString(buffer, 6);
+[; ;main.c: 68:         UARTSendString(buffer, 6);
 [e ( _UARTSendString (2 , -> _buffer `*Cuc -> -> 6 `i `uc ]
-"71
-[; ;main.c: 71:         buffer = ftoa(datos[3], status);
+"70
+[; ;main.c: 70:         buffer = ftoa(datos[3], status);
 [e = _buffer ( _ftoa (2 , *U + &U _datos * -> -> -> 3 `i `ui `ux -> -> # *U &U _datos `ui `ux -> _status `*i ]
+"71
+[; ;main.c: 71:         UARTSendString(" ", 6);
+[e ( _UARTSendString (2 , :s 4C -> -> 6 `i `uc ]
 "72
-[; ;main.c: 72:         UARTSendString(" ", 6);
-[e ( _UARTSendString (2 , :s 5C -> -> 6 `i `uc ]
-"73
-[; ;main.c: 73:         UARTSendString(buffer, 6);
+[; ;main.c: 72:         UARTSendString(buffer, 6);
 [e ( _UARTSendString (2 , -> _buffer `*Cuc -> -> 6 `i `uc ]
-"75
-[; ;main.c: 75:         buffer = ftoa(datos[4], status);
+"74
+[; ;main.c: 74:         buffer = ftoa(datos[4], status);
 [e = _buffer ( _ftoa (2 , *U + &U _datos * -> -> -> 4 `i `ui `ux -> -> # *U &U _datos `ui `ux -> _status `*i ]
+"75
+[; ;main.c: 75:         UARTSendString(" ", 6);
+[e ( _UARTSendString (2 , :s 5C -> -> 6 `i `uc ]
 "76
-[; ;main.c: 76:         UARTSendString(" ", 6);
-[e ( _UARTSendString (2 , :s 6C -> -> 6 `i `uc ]
+[; ;main.c: 76:         UARTSendString(buffer, 6);
+[e ( _UARTSendString (2 , -> _buffer `*Cuc -> -> 6 `i `uc ]
 "77
-[; ;main.c: 77:         UARTSendString(buffer, 6);
-[e ( _UARTSendString (2 , -> _buffer `*Cuc -> -> 6 `i `uc ]
-"78
-[; ;main.c: 78:         buffer = ftoa(datos[5], status);
+[; ;main.c: 77:         buffer = ftoa(datos[5], status);
 [e = _buffer ( _ftoa (2 , *U + &U _datos * -> -> -> 5 `i `ui `ux -> -> # *U &U _datos `ui `ux -> _status `*i ]
+"78
+[; ;main.c: 78:         UARTSendString(" ", 6);
+[e ( _UARTSendString (2 , :s 6C -> -> 6 `i `uc ]
 "79
-[; ;main.c: 79:         UARTSendString(" ", 6);
-[e ( _UARTSendString (2 , :s 7C -> -> 6 `i `uc ]
-"80
-[; ;main.c: 80:         UARTSendString(buffer, 6);
+[; ;main.c: 79:         UARTSendString(buffer, 6);
 [e ( _UARTSendString (2 , -> _buffer `*Cuc -> -> 6 `i `uc ]
-"82
-[; ;main.c: 82:         buffer = ftoa(datos[6], status);
+"81
+[; ;main.c: 81:         buffer = ftoa(datos[6], status);
 [e = _buffer ( _ftoa (2 , *U + &U _datos * -> -> -> 6 `i `ui `ux -> -> # *U &U _datos `ui `ux -> _status `*i ]
+"82
+[; ;main.c: 82:         UARTSendString(" ", 6);
+[e ( _UARTSendString (2 , :s 7C -> -> 6 `i `uc ]
 "83
-[; ;main.c: 83:         UARTSendString(" ", 6);
-[e ( _UARTSendString (2 , :s 8C -> -> 6 `i `uc ]
-"84
-[; ;main.c: 84:         UARTSendString(buffer, 6);
+[; ;main.c: 83:         UARTSendString(buffer, 6);
 [e ( _UARTSendString (2 , -> _buffer `*Cuc -> -> 6 `i `uc ]
-"86
-[; ;main.c: 86:         UARTSendChar('\n');
+"85
+[; ;main.c: 85:         UARTSendChar('\n');
 [e ( _UARTSendChar (1 -> -> 10 `ui `uc ]
-"103
-[; ;main.c: 103:     }
+"86
+[; ;main.c: 86:         PORTA = ~PORTA;
+[e = _PORTA -> ~ -> _PORTA `i `uc ]
+"102
+[; ;main.c: 102:     }
 }
 [e :U 144 ]
 [e $U 145  ]
 [e :U 146 ]
-"104
-[; ;main.c: 104:     return;
+"103
+[; ;main.c: 103:     return;
 [e $UE 143  ]
-"105
-[; ;main.c: 105: }
+"104
+[; ;main.c: 104: }
 [e :UE 143 ]
 }
+[v $root$_isr `(v ~T0 @X0 0 e ]
+"106
+[; ;main.c: 106: void __attribute__((picinterrupt(("")))) isr() {
+[v _isr `(v ~T1 @X0 1 ef ]
+{
+[e :U _isr ]
+[f ]
+"108
+[; ;main.c: 108:     if (PIR1bits.RCIF) {
+[e $ ! != -> . . _PIR1bits 0 5 `i -> 0 `i 148  ]
+{
+"111
+[; ;main.c: 111:         if (RCREG == 'A') {
+[e $ ! == -> _RCREG `ui -> 65 `ui 149  ]
+{
+"112
+[; ;main.c: 112:             bandera = 1;
+[e = _bandera -> -> 1 `i `uc ]
+"114
+[; ;main.c: 114:         }
+}
+[e :U 149 ]
+"115
+[; ;main.c: 115:     }
+}
+[e :U 148 ]
+"116
+[; ;main.c: 116:     return;
+[e $UE 147  ]
+"117
+[; ;main.c: 117: }
+[e :UE 147 ]
+}
+[a 1C 32 0 ]
 [a 2C 32 0 ]
 [a 3C 32 0 ]
 [a 4C 32 0 ]
 [a 5C 32 0 ]
 [a 6C 32 0 ]
 [a 7C 32 0 ]
-[a 8C 32 0 ]
-[a 1C 104 111 108 97 32 97 32 116 111 100 111 115 10 0 ]

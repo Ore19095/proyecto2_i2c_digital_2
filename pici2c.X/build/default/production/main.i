@@ -2836,14 +2836,14 @@ extern char * ftoa(float f, int * status);
 
 # 1 "./I2C.h" 1
 # 17 "./I2C.h"
-void I2C_Master_Init(void);
-void I2C_Master_Wait(void);
-void I2C_Master_Start(void);
+void I2C_Master_Init();
+void I2C_Master_Wait();
+void I2C_Master_Start();
 void I2C_Start(char add);
-void I2C_Master_RepeatedStart(void);
-void I2C_Master_Stop(void);
-void I2C_ACK(void);
-void I2C_NACK(void);
+void I2C_Master_RepeatedStart();
+void I2C_Master_Stop();
+void I2C_ACK();
+void I2C_NACK();
 unsigned char I2C_Master_Write(unsigned char data);
 unsigned char I2C_Read_Byte();
 unsigned char I2C_Read(unsigned char);
@@ -2905,8 +2905,8 @@ void readMPU(float*);
 # 32 "main.c" 2
 
 
-
-
+volatile char datoRecibido;
+volatile uint8_t bandera;
 
 void main(void) {
     ANSEL = 0;
@@ -2919,17 +2919,16 @@ void main(void) {
     UARTInit(9600, 1);
     confMPU();
 
-
-
-
+    INTCONbits.GIE = 1;
+    INTCONbits.PEIE = 1;
+    PIE1bits.RCIE = 1;
     int status;
     float datos[7];
     while (1) {
         readMPU(datos);
 
 
-        UARTSendString("hola a todos\n",13);
-        PORTA = ~PORTA;
+        bandera = 0;
         buffer = ftoa(datos[0], status);
         UARTSendString(" ", 10);
         UARTSendString(buffer, 6);
@@ -2958,7 +2957,21 @@ void main(void) {
         UARTSendString(buffer, 6);
 
         UARTSendChar('\n');
-# 103 "main.c"
+        PORTA = ~PORTA;
+# 102 "main.c"
+    }
+    return;
+}
+
+void __attribute__((picinterrupt(("")))) isr() {
+
+    if (PIR1bits.RCIF) {
+
+
+        if (RCREG == 'A') {
+            bandera = 1;
+
+        }
     }
     return;
 }

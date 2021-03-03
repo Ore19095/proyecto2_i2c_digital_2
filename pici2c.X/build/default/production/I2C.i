@@ -2492,14 +2492,14 @@ extern __bank0 __bit __timeout;
 
 # 1 "./I2C.h" 1
 # 17 "./I2C.h"
-void I2C_Master_Init(void);
-void I2C_Master_Wait(void);
-void I2C_Master_Start(void);
+void I2C_Master_Init();
+void I2C_Master_Wait();
+void I2C_Master_Start();
 void I2C_Start(char add);
-void I2C_Master_RepeatedStart(void);
-void I2C_Master_Stop(void);
-void I2C_ACK(void);
-void I2C_NACK(void);
+void I2C_Master_RepeatedStart();
+void I2C_Master_Stop();
+void I2C_ACK();
+void I2C_NACK();
 unsigned char I2C_Master_Write(unsigned char data);
 unsigned char I2C_Read_Byte();
 unsigned char I2C_Read(unsigned char);

@@ -31,8 +31,8 @@
 #include "UART.h"
 #include "MPU6050.h"
 
-//volatile char datoRecibido;
-//volatile uint8_t bandera;
+volatile char datoRecibido;
+volatile uint8_t bandera;
 
 void main(void) {
     ANSEL = 0;
@@ -45,17 +45,16 @@ void main(void) {
     UARTInit(9600, 1);
     confMPU();
     // se configura la interrupcion
-//    INTCONbits.GIE = 1;
-//    INTCONbits.PEIE = 1;
-//    PIE1bits.RCIE = 1;
+    INTCONbits.GIE = 1;
+    INTCONbits.PEIE = 1;
+    PIE1bits.RCIE = 1;
     int status;
     float datos[7];
     while (1) {
         readMPU(datos);
 
         //if (bandera== 1) {
-        UARTSendString("hola a todos\n",13);
-        PORTA = ~PORTA;
+        bandera = 0;
         buffer = ftoa(datos[0], status);
         UARTSendString(" ", 10);
         UARTSendString(buffer, 6);
@@ -84,7 +83,7 @@ void main(void) {
         UARTSendString(buffer, 6);
 
         UARTSendChar('\n');
-        
+        PORTA = ~PORTA;
         //-}
 
 
@@ -98,21 +97,21 @@ void main(void) {
         //        sprintf(buffer,"Temp: %f ",datos[3]);
         //        UARTSendString(buffer,15);
         //        UARTSendChar('\n');
-     //   __delay_ms(100);
+        //__delay_ms(100);
 
     }
     return;
 }
 
-//void __interrupt() isr() {
-//
-//    if (PIR1bits.RCIF) {
-//
-//
-//        if (RCREG == 'A') {
-//            bandera = 1;
-//
-//        }
-//    }
-//    return;
-//}
+void __interrupt() isr() {
+
+    if (PIR1bits.RCIF) {
+
+
+        if (RCREG == 'A') {
+            bandera = 1;
+
+        }
+    }
+    return;
+}

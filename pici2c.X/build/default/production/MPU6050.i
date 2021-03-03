@@ -2636,14 +2636,14 @@ typedef uint16_t uintptr_t;
 
 # 1 "./I2C.h" 1
 # 17 "./I2C.h"
-void I2C_Master_Init(void);
-void I2C_Master_Wait(void);
-void I2C_Master_Start(void);
+void I2C_Master_Init();
+void I2C_Master_Wait();
+void I2C_Master_Start();
 void I2C_Start(char add);
-void I2C_Master_RepeatedStart(void);
-void I2C_Master_Stop(void);
-void I2C_ACK(void);
-void I2C_NACK(void);
+void I2C_Master_RepeatedStart();
+void I2C_Master_Stop();
+void I2C_ACK();
+void I2C_NACK();
 unsigned char I2C_Master_Write(unsigned char data);
 unsigned char I2C_Read_Byte();
 unsigned char I2C_Read(unsigned char);
@@ -2660,12 +2660,11 @@ void readMPU(float*);
 void readMPU(float* datos) {
     char valores[14];
     int guardar[7];
-
     I2C_Start(0xD0);
-
+    while (SSPCON2bits.ACKSTAT);
     I2C_Master_Write(0x3B);
-
-    I2C_Master_Start();
+    while (SSPCON2bits.ACKSTAT);
+    I2C_Master_RepeatedStart();
     I2C_Master_Write(0xD1);
     for (int i = 0; i < 13; i++) valores[i] = I2C_Read(0);
     valores[13] = I2C_Read(1);

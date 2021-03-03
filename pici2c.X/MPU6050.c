@@ -28,12 +28,11 @@
 void readMPU(float* datos) {
     char valores[14];//valores temporales
     int guardar[7]; // arreglo donde se van a guardar los datos 
-     
     I2C_Start(0xD0);
-    //while (SSPCON2bits.ACKSTAT);
+    while (SSPCON2bits.ACKSTAT);
     I2C_Master_Write(0x3B);
-    //while (SSPCON2bits.ACKSTAT);
-    I2C_Master_Start();
+    while (SSPCON2bits.ACKSTAT);
+    I2C_Master_RepeatedStart();
     I2C_Master_Write(0xD1);
     for (int i = 0; i < 13; i++) valores[i] = I2C_Read(0);
     valores[13] = I2C_Read(1);
