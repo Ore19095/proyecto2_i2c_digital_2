@@ -2749,8 +2749,93 @@ extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 # 28 "main.c" 2
 
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdlib.h" 1 3
+
+
+
+
+
+
+typedef unsigned short wchar_t;
+
+
+
+
+
+
+
+typedef struct {
+ int rem;
+ int quot;
+} div_t;
+typedef struct {
+ unsigned rem;
+ unsigned quot;
+} udiv_t;
+typedef struct {
+ long quot;
+ long rem;
+} ldiv_t;
+typedef struct {
+ unsigned long quot;
+ unsigned long rem;
+} uldiv_t;
+# 65 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdlib.h" 3
+extern double atof(const char *);
+extern double strtod(const char *, const char **);
+extern int atoi(const char *);
+extern unsigned xtoi(const char *);
+extern long atol(const char *);
+
+
+
+extern long strtol(const char *, char **, int);
+
+extern int rand(void);
+extern void srand(unsigned int);
+extern void * calloc(size_t, size_t);
+extern div_t div(int numer, int denom);
+extern udiv_t udiv(unsigned numer, unsigned denom);
+extern ldiv_t ldiv(long numer, long denom);
+extern uldiv_t uldiv(unsigned long numer,unsigned long denom);
+
+
+
+extern unsigned long _lrotl(unsigned long value, unsigned int shift);
+extern unsigned long _lrotr(unsigned long value, unsigned int shift);
+extern unsigned int _rotl(unsigned int value, unsigned int shift);
+extern unsigned int _rotr(unsigned int value, unsigned int shift);
+
+
+
+
+extern void * malloc(size_t);
+extern void free(void *);
+extern void * realloc(void *, size_t);
+# 104 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdlib.h" 3
+extern int atexit(void (*)(void));
+extern char * getenv(const char *);
+extern char ** environ;
+extern int system(char *);
+extern void qsort(void *, size_t, size_t, int (*)(const void *, const void *));
+extern void * bsearch(const void *, void *, size_t, size_t, int(*)(const void *, const void *));
+extern int abs(int);
+extern long labs(long);
+
+extern char * itoa(char * buf, int val, int base);
+extern char * utoa(char * buf, unsigned val, int base);
+
+
+
+
+extern char * ltoa(char * buf, long val, int base);
+extern char * ultoa(char * buf, unsigned long val, int base);
+
+extern char * ftoa(float f, int * status);
+# 29 "main.c" 2
+
 # 1 "./I2C.h" 1
-# 16 "./I2C.h"
+# 17 "./I2C.h"
 void I2C_Master_Init();
 void I2C_Master_Wait();
 void I2C_Master_Start();
@@ -2762,7 +2847,7 @@ void I2C_NACK();
 unsigned char I2C_Master_Write(unsigned char data);
 unsigned char I2C_Read_Byte();
 unsigned char I2C_Read(unsigned char);
-# 29 "main.c" 2
+# 30 "main.c" 2
 
 # 1 "./UART.h" 1
 # 16 "./UART.h"
@@ -2803,7 +2888,7 @@ char UARTReadChar();
 
 
 uint8_t UARTReadString(char *buf, uint8_t max_length);
-# 30 "main.c" 2
+# 31 "main.c" 2
 
 # 1 "./MPU6050.h" 1
 # 15 "./MPU6050.h"
@@ -2816,8 +2901,8 @@ uint8_t UARTReadString(char *buf, uint8_t max_length);
 
 void confMPU(void);
 # 34 "./MPU6050.h"
-void readMPU(int*);
-# 31 "main.c" 2
+void readMPU(float*);
+# 32 "main.c" 2
 
 
 
@@ -2826,47 +2911,45 @@ void main(void) {
     ANSEL = 0;
     TRISA = 0;
     PORTA = 0;
-    char buffer[25];
+    char* buffer;
 
     I2C_Master_Init();
     UARTInit(9600,1);
-    uint8_t val= 1;
     confMPU();
-    char valores[8];
-    int valorx,valory,valorz,temp;
+    int status;
+    float datos[7];
     while(1){
-        I2C_Start(0xD0);
-        while(SSPCON2bits.ACKSTAT);
-        I2C_Master_Write(0x3B);
-        while(SSPCON2bits.ACKSTAT);
-# 69 "main.c"
-        I2C_Start(0xD0);
-        while(SSPCON2bits.ACKSTAT);
-        I2C_Master_Write(0x3B);
-        while(SSPCON2bits.ACKSTAT);
-        I2C_Master_RepeatedStart();
-        I2C_Master_Write(0xD1);
-        for (int i= 0; i<7;i++) valores[i] = I2C_Read(0);
-        valores[7] = I2C_Read(1);
-        I2C_Master_Stop();
+        readMPU(datos);
 
+        buffer = ftoa(datos[0],status);
+        UARTSendString(" ",10);
+        UARTSendString(buffer,25);
 
-        valorx = ((int) valores[0] << 8 ) | ((int) valores[1] );
-        valory = ((int) valores[2] << 8 ) | ((int) valores[3] );
-        valorz = ((int) valores[4] << 8 ) | ((int) valores[5] );
-        temp = ((int) valores[6] << 8 ) | ((int) valores[7] );
-        sprintf(buffer,"Ax: %i ",valorx);
-        UARTSendString(buffer,15);
-        sprintf(buffer,"Ay: %i ",valory);
-        UARTSendString(buffer,15);
-        sprintf(buffer,"Az: %i ",valorz);
-        UARTSendString(buffer,15);
-        sprintf(buffer,"Temp: %i ",temp);
-        UARTSendString(buffer,15);
+        buffer = ftoa(datos[1],status);
+        UARTSendString(" ",10);
+        UARTSendString(buffer,25);
+
+        buffer = ftoa(datos[2],status);
+        UARTSendString(" ",10);
+        UARTSendString(buffer,25);
+
+        buffer = ftoa(datos[3],status);
+        UARTSendString(" ",10);
+        UARTSendString(buffer,25);
+
+        buffer = ftoa(datos[4],status);
+        UARTSendString(" ",10);
+        UARTSendString(buffer,25);
+        buffer = ftoa(datos[5],status);
+        UARTSendString(" ",10);
+        UARTSendString(buffer,25);
+
+        buffer = ftoa(datos[6],status);
+        UARTSendString(" ",10);
+        UARTSendString(buffer,25);
+
         UARTSendChar('\n');
-        _delay((unsigned long)((250)*(4000000/4000.0)));
-        val++;
-
+# 90 "main.c"
     }
     return;
 }

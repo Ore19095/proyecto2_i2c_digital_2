@@ -26,6 +26,7 @@
 #include <xc.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "I2C.h"
 #include "UART.h"
 #include "MPU6050.h"
@@ -36,62 +37,55 @@ void main(void) {
     ANSEL = 0;
     TRISA = 0;
     PORTA = 0;
-    char buffer[25];
+    char* buffer;
     //int estado;
     I2C_Master_Init();
     UARTInit(9600,1);
-    uint8_t val= 1;
     confMPU();
-    char valores[8];
-    int valorx,valory,valorz,temp;
+    int status;
+    float datos[7];
     while(1){
-        I2C_Start(0xD0);
-        while(SSPCON2bits.ACKSTAT);
-        I2C_Master_Write(0x3B);
-        while(SSPCON2bits.ACKSTAT);        
-//        while(SSPCON2bits.ACKSTAT);
-//        I2C_Master_RepeatedStart();
-//        I2C_Master_Write(0xD1);
-//        while(SSPCON2bits.ACKSTAT);
-//        valores[0] = I2C_Read(1);
-//        I2C_Master_Stop();
-//        
-//        I2C_Start(0xD0);
-//        while(SSPCON2bits.ACKSTAT);
-//        I2C_Master_Write(0x3B);
-//        while(SSPCON2bits.ACKSTAT);
-//        I2C_Master_RepeatedStart();
-//        I2C_Master_Write(0xD1);
-//        while(SSPCON2bits.ACKSTAT);
-//        valores[1] = I2C_Read(1);
-//        I2C_Master_Stop();
-//        
-        I2C_Start(0xD0);
-        while(SSPCON2bits.ACKSTAT);
-        I2C_Master_Write(0x3B);
-        while(SSPCON2bits.ACKSTAT);
-        I2C_Master_RepeatedStart();
-        I2C_Master_Write(0xD1);
-        for (int i= 0; i<7;i++) valores[i] = I2C_Read(0);
-        valores[7] = I2C_Read(1);
-        I2C_Master_Stop();
-//        //-------------------------
-//        
-        valorx = ((int) valores[0] << 8  ) | ((int) valores[1] );
-        valory = ((int) valores[2] << 8  ) | ((int) valores[3] );
-        valorz = ((int) valores[4] << 8  ) | ((int) valores[5] );
-        temp = ((int) valores[6] << 8  ) | ((int) valores[7] );
-        sprintf(buffer,"Ax: %i ",valorx);
-        UARTSendString(buffer,15);
-        sprintf(buffer,"Ay: %i ",valory);
-        UARTSendString(buffer,15);
-        sprintf(buffer,"Az: %i ",valorz);
-        UARTSendString(buffer,15);
-        sprintf(buffer,"Temp: %i ",temp);
-        UARTSendString(buffer,15);
+        readMPU(datos);
+        
+        buffer = ftoa(datos[0],status);
+        UARTSendString(" ",10);
+        UARTSendString(buffer,25);
+        
+        buffer = ftoa(datos[1],status);
+        UARTSendString(" ",10);
+        UARTSendString(buffer,25);
+        
+        buffer = ftoa(datos[2],status);
+        UARTSendString(" ",10);
+        UARTSendString(buffer,25);
+        
+        buffer = ftoa(datos[3],status);
+        UARTSendString(" ",10);
+        UARTSendString(buffer,25);
+        
+        buffer = ftoa(datos[4],status);
+        UARTSendString(" ",10);
+        UARTSendString(buffer,25);
+        buffer = ftoa(datos[5],status);
+        UARTSendString(" ",10);
+        UARTSendString(buffer,25);
+        
+        buffer = ftoa(datos[6],status);
+        UARTSendString(" ",10);
+        UARTSendString(buffer,25);
+        
         UARTSendChar('\n');
-        __delay_ms(250);
-        val++;
+        
+//        sprintf(buffer,"Ax: %f ",datos[0]);
+//        UARTSendString(buffer,15);  
+//        sprintf(buffer,"Ay: %f ",datos[1]);
+//        UARTSendString(buffer,15);
+//        sprintf(buffer,"Az: %f ",datos[2]);
+//        UARTSendString(buffer,15);
+//        sprintf(buffer,"Temp: %f ",datos[3]);
+//        UARTSendString(buffer,15);
+//        UARTSendChar('\n');
+        //__delay_ms(250);
         
     }
     return;

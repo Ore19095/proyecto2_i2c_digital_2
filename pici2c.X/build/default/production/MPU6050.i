@@ -2635,7 +2635,7 @@ typedef uint16_t uintptr_t;
 # 15 "./MPU6050.h" 2
 
 # 1 "./I2C.h" 1
-# 16 "./I2C.h"
+# 17 "./I2C.h"
 void I2C_Master_Init();
 void I2C_Master_Wait();
 void I2C_Master_Start();
@@ -2654,28 +2654,41 @@ unsigned char I2C_Read(unsigned char);
 
 void confMPU(void);
 # 34 "./MPU6050.h"
-void readMPU(int*);
+void readMPU(float*);
 # 9 "MPU6050.c" 2
 # 28 "MPU6050.c"
-void readMPU(int* guardar) {
-    int valores[7];
-    I2C_Master_Start();
-    I2C_Master_Write(0x68);
+void readMPU(float* datos) {
+    char valores[14];
+    int guardar[7];
+    I2C_Start(0xD0);
+    while (SSPCON2bits.ACKSTAT);
     I2C_Master_Write(0x3B);
+    while (SSPCON2bits.ACKSTAT);
+    I2C_Master_RepeatedStart();
+    I2C_Master_Write(0xD1);
+    for (int i = 0; i < 13; i++) valores[i] = I2C_Read(0);
+    valores[13] = I2C_Read(1);
     I2C_Master_Stop();
 
-    I2C_Master_Start();
-    I2C_Master_Write(0xE8);
-# 46 "MPU6050.c"
-    I2C_Master_Stop();
+
+    guardar[0] = ((int) valores[0] << 8) | ((int) valores[1]);
+    guardar[1] = ((int) valores[2] << 8) | ((int) valores[3]);
+    guardar[2] = ((int) valores[4] << 8) | ((int) valores[5]);
+    guardar[3] = ((int) valores[6] << 8) | ((int) valores[7]);
+    guardar[4] = ((int) valores[8] << 8) | ((int) valores[9]);
+    guardar[5] = ((int) valores[10] << 8) | ((int) valores[11]);
+    guardar[6] = ((int) valores[12] << 8) | ((int) valores[13]);
+
+    datos[0] = ((float) guardar[0]) * 0.0005982;
+    datos[1] = ((float) guardar[1]) * 0.0005982;
+    datos[2] = ((float) guardar[2]) * 0.0005982;
+    datos[3] = ((float) guardar[3])/340 + 36.53;
+    datos[4] = ((float) guardar[4]) * 0.00763;
+    datos[5] = ((float) guardar[5]) * 0.00763;
+    datos[6] = ((float) guardar[6]) * 0.00763;
 
 
 
-
-
-
-
-    guardar = valores;
     return;
 }
 

@@ -31,7 +31,7 @@ void confMPU(void);
  * valores[5]=giroscopioy, valores[6]=giroscopioz. este parametro debe de tener
  * porlo menos un tamaño de 7 datos de tipo entero.
  */
-void readMPU(int*);
+void readMPU(float*);
 
 #endif	/* MPU_6050_H */
 

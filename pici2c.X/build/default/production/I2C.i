@@ -2491,7 +2491,7 @@ extern __bank0 __bit __timeout;
 # 2 "I2C.c" 2
 
 # 1 "./I2C.h" 1
-# 16 "./I2C.h"
+# 17 "./I2C.h"
 void I2C_Master_Init();
 void I2C_Master_Wait();
 void I2C_Master_Start();

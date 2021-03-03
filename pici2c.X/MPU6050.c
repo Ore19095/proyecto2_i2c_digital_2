@@ -25,44 +25,49 @@
  * seran los ultimos dos (leidos de derecha a izquierda)
  *
  */
-void readMPU(int* guardar) {
-    int valores[7];
-    I2C_Master_Start();
-    I2C_Master_Write(0x68); //direccion del mpu con escritura
-    I2C_Master_Write(0x3B); //se prepara para leer los datos
-    I2C_Master_Stop(); //fin
-
-    I2C_Master_Start();
-    I2C_Master_Write(0xE8); // direccion del sensor, con modo lectura
-
-//    valores[0] = ((int) I2C_Master_Read(0) << 8) | (int) I2C_Master_Read(0);
-//    valores[1] = ((int) I2C_Master_Read(0) << 8) | (int) I2C_Master_Read(0);
-//    valores[2] = ((int) I2C_Master_Read(0) << 8) | (int) I2C_Master_Read(0);
-//    valores[3] = ((int) I2C_Master_Read(0) << 8) | (int) I2C_Master_Read(0);
-//    valores[4] = ((int) I2C_Master_Read(0) << 8) | (int) I2C_Master_Read(0);
-//    valores[5] = ((int) I2C_Master_Read(0) << 8) | (int) I2C_Master_Read(0);
-//    valores[6] = ((int) I2C_Master_Read(0) << 8) | (int) I2C_Master_Read(1);
-
-    I2C_Master_Stop(); // fin de la comunicacion 
-    // despues se convierten a sus valores fisicos
-    // acelerometro
-    //    for (int i= 0; i<3; i++)guardar[i] = valores[i]*0.0005981;
-    //    //temperatura
-    //    guardar[3] =  ((float) valores[3]/340) + 36.53;
-    //    //giroscopio
-    //    for (int i =4; i<7; i++) guardar[i]= valores[i]*0.763;
-    guardar = valores;
+void readMPU(float* datos) {
+    char valores[14];//valores temporales
+    int guardar[7]; // arreglo donde se van a guardar los datos 
+    I2C_Start(0xD0);
+    while (SSPCON2bits.ACKSTAT);
+    I2C_Master_Write(0x3B);
+    while (SSPCON2bits.ACKSTAT);
+    I2C_Master_RepeatedStart();
+    I2C_Master_Write(0xD1);
+    for (int i = 0; i < 13; i++) valores[i] = I2C_Read(0);
+    valores[13] = I2C_Read(1);
+    I2C_Master_Stop();
+    //        //-------------------------
+    //        
+    guardar[0] = ((int) valores[0] << 8) | ((int) valores[1]);
+    guardar[1] = ((int) valores[2] << 8) | ((int) valores[3]);
+    guardar[2] = ((int) valores[4] << 8) | ((int) valores[5]);
+    guardar[3] = ((int) valores[6] << 8) | ((int) valores[7]);
+    guardar[4] = ((int) valores[8] << 8) | ((int) valores[9]);
+    guardar[5] = ((int) valores[10] << 8) | ((int) valores[11]);
+    guardar[6] = ((int) valores[12] << 8) | ((int) valores[13]);
+    
+    datos[0] = ((float) guardar[0]) * 0.0005982; //aceleracion en m/s^2
+    datos[1] = ((float) guardar[1]) * 0.0005982; //aceleracion en m/s^2
+    datos[2] = ((float) guardar[2]) * 0.0005982; //aceleracion en m/s^2
+    datos[3] = ((float) guardar[3])/340 + 36.53;
+    datos[4] = ((float) guardar[4]) * 0.00763; //grados/s
+    datos[5] = ((float) guardar[5]) * 0.00763; //grados/s
+    datos[6] = ((float) guardar[6]) * 0.00763; //grados/s
+    
+    
+    
     return;
 }
 
 void confMPU() {
-    
+
     I2C_Master_Start();
     I2C_Master_Write(0xD0); //direccion del mpu6050 para escritura,
     I2C_Master_Write(0x6B); // power managment 1 
     I2C_Master_Write(0x01); //giroscopio en x referencia  
     I2C_Master_Stop();
-    
+
     I2C_Master_Start();
     I2C_Master_Write(0xD0); //direccion del mpu6050 para escritura,
     I2C_Master_Write(0x00); //  Sample rate
