@@ -43,7 +43,7 @@ void setup() {
 
   // start the serial connection
   Serial.begin(115200);
-  Serial2.begin(9600);
+  Serial2.begin(19200);
   // wait for serial monitor to open
   //while(! Serial);
 
@@ -72,6 +72,13 @@ void setup() {
 }
 
 void loop() {
+  if(Serial.available()>0){
+    Serial2.print('G');
+    Serial.print("holo");
+    Serial.flush();
+  }
+
+  
   while(Serial2.available()){
       char entrante = Serial2.read();
       if( entrante != '\n') datos.concat(entrante);

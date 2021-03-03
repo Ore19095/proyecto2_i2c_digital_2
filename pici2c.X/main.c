@@ -32,6 +32,8 @@
 #include "MPU6050.h"
 
 
+char banderas = 0; //indicar eventos
+
 void main(void) {
     __delay_ms(1000);
     ANSEL = 0;
@@ -40,53 +42,76 @@ void main(void) {
     char* buffer;
     //int estado;
     I2C_Master_Init();
-    UARTInit(9600,1);
+    UARTInit(19200, 1);
     confMPU();
     int status;
     float datos[7];
-    while(1){
+    // interrupciones
+    INTCONbits.GIE = 1;
+    INTCONbits.PEIE = 1;
+    PIE1bits.RCIE = 1; // se activa
+    
+    while (1) {
         readMPU(datos);
-        
-        buffer = ftoa(datos[0],status);
-        UARTSendString(" ",10);
-        UARTSendString(buffer,25);
-        
-        buffer = ftoa(datos[1],status);
-        UARTSendString(" ",10);
-        UARTSendString(buffer,25);
-        
-        buffer = ftoa(datos[2],status);
-        UARTSendString(" ",10);
-        UARTSendString(buffer,25);
-        
-        buffer = ftoa(datos[3],status);
-        UARTSendString(" ",10);
-        UARTSendString(buffer,25);
-        
-        buffer = ftoa(datos[4],status);
-        UARTSendString(" ",10);
-        UARTSendString(buffer,25);
-        buffer = ftoa(datos[5],status);
-        UARTSendString(" ",10);
-        UARTSendString(buffer,25);
-        
-        buffer = ftoa(datos[6],status);
-        UARTSendString(" ",10);
-        UARTSendString(buffer,25);
-        
-        UARTSendChar('\n');
-        
-//        sprintf(buffer,"Ax: %f ",datos[0]);
-//        UARTSendString(buffer,15);  
-//        sprintf(buffer,"Ay: %f ",datos[1]);
-//        UARTSendString(buffer,15);
-//        sprintf(buffer,"Az: %f ",datos[2]);
-//        UARTSendString(buffer,15);
-//        sprintf(buffer,"Temp: %f ",datos[3]);
-//        UARTSendString(buffer,15);
-//        UARTSendChar('\n');
+
+        if ((banderas & 1) == 1) {
+            banderas -= 1; // se coloca en 0 el 1er bit y se conserban los demas
+            buffer = ftoa(datos[0], status);
+            UARTSendString(buffer, 6); //solo 5 cifras se envian
+
+            buffer = ftoa(datos[1], status);
+            UARTSendString(" ", 10);
+            UARTSendString(buffer, 6);
+
+            buffer = ftoa(datos[2], status);
+            UARTSendString(" ", 10);
+            UARTSendString(buffer, 6);
+
+            buffer = ftoa(datos[3], status);
+            UARTSendString(" ", 10);
+            UARTSendString(buffer, 6);
+
+            buffer = ftoa(datos[4], status);
+            UARTSendString(" ", 10);
+            UARTSendString(buffer, 6);
+            buffer = ftoa(datos[5], status);
+            UARTSendString(" ", 10);
+            UARTSendString(buffer, 6);
+
+            buffer = ftoa(datos[6], status);
+            UARTSendString(" ", 10);
+            UARTSendString(buffer, 6);
+
+            UARTSendChar('\n');
+        }
+
+        //        sprintf(buffer,"Ax: %f ",datos[0]);
+        //        UARTSendString(buffer,15);  
+        //        sprintf(buffer,"Ay: %f ",datos[1]);
+        //        UARTSendString(buffer,15);
+        //        sprintf(buffer,"Az: %f ",datos[2]);
+        //        UARTSendString(buffer,15);
+        //        sprintf(buffer,"Temp: %f ",datos[3]);
+        //        UARTSendString(buffer,15);
+        //        UARTSendChar('\n');
         //__delay_ms(250);
-        
+
     }
     return;
+}
+
+void __interrupt() isr() {
+
+    if (PIR1bits.RCIF) {
+        char entrante = RCREG; //se lee y se apaga la bandera
+        switch (entrante) {
+            case 'G': //me pide que envie datos del mpu como string
+                banderas = banderas | 1; //se pone a 1 el 1er bit
+                break;
+            default:
+                break;
+        }
+    }
+
+
 }
