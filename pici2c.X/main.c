@@ -105,17 +105,9 @@ void __interrupt() isr() {
     if (PIR1bits.RCIF) {
         char entrante = RCREG; //se lee y se apaga la bandera
         switch (entrante) {
-            case 'A': //me pide que envie datos del mpu como string
-                PORTAbits.RA0 = 1;
+            case 'G': //me pide que envie datos del mpu como string
+                banderas = banderas | 1; //se pone a 1 el 1er bit
                 break;
-            case 'B':
-                PORTAbits.RA0 = 0;
-                break;
-            case 'C':
-                PORTAbits.RA1 = 1;
-                break;
-            case 'D':
-                PORTAbits.RA1 = 0;
             default:
                 break;
         }

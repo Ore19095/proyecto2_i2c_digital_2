@@ -17,8 +17,8 @@
 //   https://www.adafruit.com/product/4000
 //   - Adafruit AirLift Breakout -> https://www.adafruit.com/product/4201
 
-#define WIFI_SSID "AngelOrellana"
-#define WIFI_PASS "12436587"
+#define WIFI_SSID "CUCV-4SUR"
+#define WIFI_PASS ""
 
 // uncomment the following line if you are using airlift
 // #define USE_AIRLIFT
