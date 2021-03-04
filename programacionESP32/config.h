@@ -2,9 +2,8 @@
 
 // visit io.adafruit.com if you need to create an account,
 // or if you need your Adafruit IO key.
-#define IO_USERNAME "your_username"
-#define IO_KEY "your_key"
-
+#define IO_USERNAME  "Angel_19095"
+#define IO_KEY       "aio_SiqP32xjDO4Cy2KIdwydYqvuuArl"
 /******************************* WIFI **************************************/
 
 // the AdafruitIO_WiFi client will work with the following boards:
@@ -18,8 +17,8 @@
 //   https://www.adafruit.com/product/4000
 //   - Adafruit AirLift Breakout -> https://www.adafruit.com/product/4201
 
-#define WIFI_SSID "your_ssid"
-#define WIFI_PASS "your_pass"
+#define WIFI_SSID "CUCV-4SUR"
+#define WIFI_PASS ""
 
 // uncomment the following line if you are using airlift
 // #define USE_AIRLIFT

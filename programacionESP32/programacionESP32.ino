@@ -16,13 +16,19 @@
 // and any additional configuration needed for WiFi, cellular,
 // or ethernet clients.
 
-//#include "config.h"
+#include "config.h"
 
 /************************ Example Starts Here *******************************/
-
-// this int will hold the current count for our sketch
-//int count = 0;
 String datos = ""; //almacenara los datos provenientes del pic
+String stringAx;
+String stringAy;
+String stringAz;
+String stringTemp;
+String stringGx;
+String stringGy;
+String stringGz; //valorse donde se almacenara los string de los datos;
+float aX,aY,aZ,temperatura,gX,gY,gZ; // donde se guardaran los datos numericos 
+
 // Track time of last published messages and limit feed->save events to once
 // every IO_LOOP_DELAY milliseconds.
 //
@@ -33,11 +39,14 @@ String datos = ""; //almacenara los datos provenientes del pic
 // Instead, we can use the millis() function to get the current time in
 // milliseconds and avoid publishing until IO_LOOP_DELAY milliseconds have
 // passed.
-//#define IO_LOOP_DELAY 5000
-//unsigned long lastUpdate = 0;
+#define IO_LOOP_DELAY 10000
+unsigned long lastUpdate = 0;
 
-// set up the 'counter' feed
-//AdafruitIO_Feed *counter = io.feed("counter");
+// se crean los feeds
+
+AdafruitIO_Feed *accelx = io.feed("Acelerationx");
+AdafruitIO_Feed *accely = io.feed("Acelerationy");
+AdafruitIO_Feed *accelz = io.feed("Acelerationz");
 
 void setup() {
 
@@ -47,10 +56,10 @@ void setup() {
   // wait for serial monitor to open
   //while(! Serial);
 
-  //Serial.print("Connecting to Adafruit IO");
+  Serial.print("Connecting to Adafruit IO");
 
   // connect to io.adafruit.com
-  //io.connect();
+  io.connect();
 
   // set up a message handler for the count feed.
   // the handleMessage function (defined below)
@@ -59,55 +68,68 @@ void setup() {
   //counter->onMessage(handleMessage);
 
   // wait for a connection
-  //while(io.status() < AIO_CONNECTED) {
-    //Serial.print(".");
-    //delay(500);
-  //}
+  while(io.status() < AIO_CONNECTED) {
+    Serial.print(".");
+    delay(500);
+  }
 
   // we are connected
-  //Serial.println();
-  //Serial.println(io.statusText());
+  Serial.println();
+  Serial.println(io.statusText());
   //counter->get();
 
 }
 
 void loop() {
-  if(Serial.available()>0){
-    Serial2.print('G');
-    Serial.print("holo");
-    Serial.flush();
-  }
-
-  
   while(Serial2.available()){
       char entrante = Serial2.read();
       if( entrante != '\n') datos.concat(entrante);
       else{
         Serial.println(datos);
+        stringAx = datos.substring(0,7); //primer dato
+        stringAy = datos.substring(8,14);
+        stringAz = datos.substring(15,21);
+        stringTemp = datos.substring(22,28);
+        stringGx = datos.substring(29,35);
+        stringGy = datos.substring(36,42);
+        stringGz = datos.substring(43,49);
         datos = "";
       }
   }
-
+  Serial.println("holo");
+  aX = stringAx.toFloat();
+  aY = stringAy.toFloat();
+  aZ = stringAz.toFloat();
+  temperatura = stringTemp.toFloat();
+  gX = stringGx.toFloat();
+  gY = stringGy.toFloat();
+  gZ = stringGy.toFloat();
 
   
   // io.run(); is required for all sketches.
   // it should always be present at the top of your loop
   // function. it keeps the client connected to
   // io.adafruit.com, and processes any incoming data.
-  //io.run();
+  io.run();
 
-  //if (millis() > (lastUpdate + IO_LOOP_DELAY)) {
-    // save count to the 'counter' feed on Adafruit IO
-    //Serial.print("sending -> ");
-    //Serial.println(count);
-    //counter->save(count);
+  if (millis() > (lastUpdate + IO_LOOP_DELAY)) {
+//     save count to the 'counter' feed on Adafruit IO
+    Serial.print("sending -> ");
+    Serial.println(aX);
+    accelx->save(aX);
+    Serial.print("sending -> ");
+    Serial.println(aY);
+    accely->save(aY);
+    Serial.print("sending -> ");
+    Serial.println(aZ);
+    accelz->save(aZ);
 
     // increment the count by 1
     //count++;
 
-    // after publishing, store the current time
-    //lastUpdate = millis();
-  //}
+    // after publishing, -store the current time
+    lastUpdate = millis();
+  }
 
 }
 
