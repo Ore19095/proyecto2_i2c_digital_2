@@ -41,8 +41,6 @@ unsigned long lastUpdate = 0;
 AdafruitIO_Feed *accelx = io.feed("Acelerationx");
 AdafruitIO_Feed *accely = io.feed("Acelerationy");
 AdafruitIO_Feed *accelz = io.feed("Acelerationz");
-//AdafruitIO_Feed *piloto1 = io.feed("piloto1");
-//AdafruitIO_Feed *piloto2 = io.feed("piloto2");
 
 void setup() {
 
@@ -62,8 +60,7 @@ void setup() {
   // will be called whenever a message is
   // received from adafruit io.
   //counter->onMessage(handleMessage);
-  //piloto1->onMessage(valorPiloto1);
-  //piloto2->onMessage(valorPiloto2);
+
   // wait for a connection
   while(io.status() < AIO_CONNECTED) {
     Serial.print(".");
@@ -112,23 +109,22 @@ void loop() {
     Serial.print("sending -> ");
     Serial.println(aZ);
     accelz->save(aZ);
+
+    // increment the count by 1
+    //count++;
+
     // after publishing, store the current time
     lastUpdate = millis();
   }
 
 }
 
-void valorPiloto1(AdafruitIO_Data *data){
-  char* dato=  data->value(); // se obtiene el valor enviado;
-  if(*dato == '1') Serial.print('A'); //encender luz 1
-  else Serial.print('B'); // apagar luz 1
-  return;
-}
+// this function is called whenever a 'counter' message
+// is received from Adafruit IO. it was attached to
+// the counter feed in the setup() function above.
+//void handleMessage(AdafruitIO_Data *data) {
 
+  //Serial.print("received <- ");
+  //Serial.println(data->value());
 
-void valorPiloto2(AdafruitIO_Data *data){
-  char* dato=  data->value(); // se obtiene el valor enviado;
-  if(*dato == '1') Serial.print('C'); //encender luz 2
-  else Serial.print('D'); // apagar luz 2
-  return;
-}
+//}
