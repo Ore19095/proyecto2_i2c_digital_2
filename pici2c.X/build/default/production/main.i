@@ -2908,8 +2908,7 @@ void readMPU(float*);
 
 char banderas = 0;
 float datos[7];
-char* buffer;
-int status;
+
 
 
 void sendMPU(void);
@@ -2926,9 +2925,9 @@ void main(void) {
     confMPU();
 
 
-    INTCONbits.GIE = 1;
-    INTCONbits.PEIE = 1;
-    PIE1bits.RCIE = 1;
+
+
+
 
     while (1) {
         readMPU(datos);
@@ -2941,6 +2940,8 @@ void main(void) {
 
 
 void sendMPU() {
+    char* buffer;
+    int status;
     buffer = ftoa(datos[0], status);
     UARTSendString(buffer, 6);
 

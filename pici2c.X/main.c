@@ -34,8 +34,7 @@
 
 char banderas = 0; //indicar eventos
 float datos[7];
-char* buffer;
-int status;
+
 
 //prototipos de funciones 
 void sendMPU(void);
@@ -51,10 +50,10 @@ void main(void) {
     UARTInit(19200, 1);
     confMPU();
 
-    // interrupciones
-    INTCONbits.GIE = 1;
-    INTCONbits.PEIE = 1;
-    PIE1bits.RCIE = 1; // se activa
+//     //interrupciones
+//    INTCONbits.GIE = 1;
+//    INTCONbits.PEIE = 1;
+//    PIE1bits.RCIE = 1; // se activa
 
     while (1) {
         readMPU(datos);
@@ -67,6 +66,8 @@ void main(void) {
 // funcion que se encarga de enviar los datos del mpu por uart
 
 void sendMPU() {
+    char* buffer;
+    int status;
     buffer = ftoa(datos[0], status);
     UARTSendString(buffer, 6); //solo 5 cifras se envian
 
