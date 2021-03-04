@@ -280,7 +280,7 @@
 [v I2C_Start@add add `uc  1 a 1 wreg ]
 [v I2C_Start@add add `uc  1 a 1 wreg ]
 "32
-[v I2C_Start@add add `uc  1 a 1 7 ]
+[v I2C_Start@add add `uc  1 a 1 0 ]
 "35
 } 0
 "83
@@ -329,22 +329,22 @@
 {
 [v sprintf@sp sp `*.4uc  1 a 1 wreg ]
 "545
-[v sprintf@val val `ul  1 a 4 38 ]
+[v sprintf@val val `ul  1 a 4 39 ]
 "517
-[v sprintf@prec prec `i  1 a 2 45 ]
+[v sprintf@prec prec `i  1 a 2 46 ]
 "514
-[v sprintf@width width `i  1 a 2 43 ]
+[v sprintf@width width `i  1 a 2 44 ]
 "512
-[v sprintf@c c `uc  1 a 1 47 ]
+[v sprintf@c c `uc  1 a 1 48 ]
 "507
-[v sprintf@ap ap `[1]*.4v  1 a 1 37 ]
+[v sprintf@ap ap `[1]*.4v  1 a 1 38 ]
 "525
-[v sprintf@flag flag `uc  1 a 1 36 ]
+[v sprintf@flag flag `uc  1 a 1 37 ]
 "505
 [v sprintf@sp sp `*.4uc  1 a 1 wreg ]
-[v sprintf@f f `*.24DCuc  1 p 1 22 ]
+[v sprintf@f f `*.24DCuc  1 p 1 23 ]
 "550
-[v sprintf@sp sp `*.4uc  1 a 1 42 ]
+[v sprintf@sp sp `*.4uc  1 a 1 43 ]
 "1567
 } 0
 "8 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\isdigit.c
@@ -353,14 +353,14 @@
 [v isdigit@c c `uc  1 a 1 wreg ]
 [v isdigit@c c `uc  1 a 1 wreg ]
 "14
-[v isdigit@c c `uc  1 a 1 7 ]
+[v isdigit@c c `uc  1 a 1 1 ]
 "15
 } 0
 "15 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\Umul16.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]
 {
 "17
-[v ___wmul@product product `ui  1 a 2 6 ]
+[v ___wmul@product product `ui  1 a 2 4 ]
 "15
 [v ___wmul@multiplier multiplier `ui  1 p 2 0 ]
 [v ___wmul@multiplicand multiplicand `ui  1 p 2 2 ]
@@ -370,7 +370,7 @@
 [v ___llmod __llmod `(ul  1 e 4 0 ]
 {
 "10
-[v ___llmod@counter counter `uc  1 a 1 21 ]
+[v ___llmod@counter counter `uc  1 a 1 22 ]
 "5
 [v ___llmod@divisor divisor `ul  1 p 4 13 ]
 [v ___llmod@dividend dividend `ul  1 p 4 17 ]
@@ -439,7 +439,7 @@
 [u S703 . 4 `l 1 i 4 0 `d 1 f 4 0 `S695 1 fAsBytes 4 0 `S700 1 fAsWords 4 0 ]
 [v ___flmul@prod prod `S703  1 a 4 34 ]
 "12
-[v ___flmul@grs grs `ul  1 a 4 28 ]
+[v ___flmul@grs grs `ul  1 a 4 29 ]
 [s S772 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
 "14
 [u S775 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S772 1 nAsBytes 2 0 ]
@@ -447,7 +447,7 @@
 "10
 [v ___flmul@bexp bexp `uc  1 a 1 33 ]
 "11
-[v ___flmul@aexp aexp `uc  1 a 1 32 ]
+[v ___flmul@aexp aexp `uc  1 a 1 28 ]
 "9
 [v ___flmul@sign sign `uc  1 a 1 27 ]
 "8
@@ -460,13 +460,13 @@
 {
 [v __Umul8_16@multiplier multiplier `uc  1 a 1 wreg ]
 "6
-[v __Umul8_16@word_mpld word_mpld `ui  1 a 2 4 ]
+[v __Umul8_16@word_mpld word_mpld `ui  1 a 2 6 ]
 "5
-[v __Umul8_16@product product `ui  1 a 2 2 ]
+[v __Umul8_16@product product `ui  1 a 2 4 ]
 "4
 [v __Umul8_16@multiplier multiplier `uc  1 a 1 wreg ]
-[v __Umul8_16@multiplicand multiplicand `uc  1 p 1 6 ]
-[v __Umul8_16@multiplier multiplier `uc  1 a 1 6 ]
+[v __Umul8_16@multiplicand multiplicand `uc  1 p 1 0 ]
+[v __Umul8_16@multiplier multiplier `uc  1 a 1 8 ]
 "60
 } 0
 "4 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\flge.c

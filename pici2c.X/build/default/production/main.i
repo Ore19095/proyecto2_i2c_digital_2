@@ -2928,36 +2928,35 @@ void main(void) {
     while (1) {
         readMPU(datos);
 
-        if ((banderas & 1) == 1) {
-            banderas -= 1;
-            buffer = ftoa(datos[0], status);
-            UARTSendString(buffer, 6);
 
-            buffer = ftoa(datos[1], status);
-            UARTSendString(" ", 10);
-            UARTSendString(buffer, 6);
+        banderas -= 1;
+        buffer = ftoa(datos[0], status);
+        UARTSendString(buffer, 6);
 
-            buffer = ftoa(datos[2], status);
-            UARTSendString(" ", 10);
-            UARTSendString(buffer, 6);
+        buffer = ftoa(datos[1], status);
+        UARTSendString(" ", 10);
+        UARTSendString(buffer, 6);
 
-            buffer = ftoa(datos[3], status);
-            UARTSendString(" ", 10);
-            UARTSendString(buffer, 6);
+        buffer = ftoa(datos[2], status);
+        UARTSendString(" ", 10);
+        UARTSendString(buffer, 6);
 
-            buffer = ftoa(datos[4], status);
-            UARTSendString(" ", 10);
-            UARTSendString(buffer, 6);
-            buffer = ftoa(datos[5], status);
-            UARTSendString(" ", 10);
-            UARTSendString(buffer, 6);
+        buffer = ftoa(datos[3], status);
+        UARTSendString(" ", 10);
+        UARTSendString(buffer, 6);
 
-            buffer = ftoa(datos[6], status);
-            UARTSendString(" ", 10);
-            UARTSendString(buffer, 6);
+        buffer = ftoa(datos[4], status);
+        UARTSendString(" ", 10);
+        UARTSendString(buffer, 6);
+        buffer = ftoa(datos[5], status);
+        UARTSendString(" ", 10);
+        UARTSendString(buffer, 6);
 
-            UARTSendChar('\n');
-        }
+        buffer = ftoa(datos[6], status);
+        UARTSendString(" ", 10);
+        UARTSendString(buffer, 6);
+
+        UARTSendChar('\n');
 # 99 "main.c"
     }
     return;

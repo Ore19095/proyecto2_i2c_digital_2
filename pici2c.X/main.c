@@ -50,40 +50,40 @@ void main(void) {
     INTCONbits.GIE = 1;
     INTCONbits.PEIE = 1;
     PIE1bits.RCIE = 1; // se activa
-    
+
     while (1) {
         readMPU(datos);
 
-        if ((banderas & 1) == 1) {
-            banderas -= 1; // se coloca en 0 el 1er bit y se conserban los demas
-            buffer = ftoa(datos[0], status);
-            UARTSendString(buffer, 6); //solo 5 cifras se envian
 
-            buffer = ftoa(datos[1], status);
-            UARTSendString(" ", 10);
-            UARTSendString(buffer, 6);
+        banderas -= 1; // se coloca en 0 el 1er bit y se conserban los demas
+        buffer = ftoa(datos[0], status);
+        UARTSendString(buffer, 6); //solo 5 cifras se envian
 
-            buffer = ftoa(datos[2], status);
-            UARTSendString(" ", 10);
-            UARTSendString(buffer, 6);
+        buffer = ftoa(datos[1], status);
+        UARTSendString(" ", 10);
+        UARTSendString(buffer, 6);
 
-            buffer = ftoa(datos[3], status);
-            UARTSendString(" ", 10);
-            UARTSendString(buffer, 6);
+        buffer = ftoa(datos[2], status);
+        UARTSendString(" ", 10);
+        UARTSendString(buffer, 6);
 
-            buffer = ftoa(datos[4], status);
-            UARTSendString(" ", 10);
-            UARTSendString(buffer, 6);
-            buffer = ftoa(datos[5], status);
-            UARTSendString(" ", 10);
-            UARTSendString(buffer, 6);
+        buffer = ftoa(datos[3], status);
+        UARTSendString(" ", 10);
+        UARTSendString(buffer, 6);
 
-            buffer = ftoa(datos[6], status);
-            UARTSendString(" ", 10);
-            UARTSendString(buffer, 6);
+        buffer = ftoa(datos[4], status);
+        UARTSendString(" ", 10);
+        UARTSendString(buffer, 6);
+        buffer = ftoa(datos[5], status);
+        UARTSendString(" ", 10);
+        UARTSendString(buffer, 6);
 
-            UARTSendChar('\n');
-        }
+        buffer = ftoa(datos[6], status);
+        UARTSendString(" ", 10);
+        UARTSendString(buffer, 6);
+
+        UARTSendChar('\n');
+
 
         //        sprintf(buffer,"Ax: %f ",datos[0]);
         //        UARTSendString(buffer,15);  

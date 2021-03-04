@@ -393,80 +393,72 @@ Version 4.0 HI-TECH Software Intermediate Code
 "55
 [; ;main.c: 55:         readMPU(datos);
 [e ( _readMPU (1 &U _datos ]
-"57
-[; ;main.c: 57:         if ((banderas & 1) == 1) {
-[e $ ! == & -> _banderas `i -> 1 `i -> 1 `i 147  ]
-{
 "58
-[; ;main.c: 58:             banderas -= 1;
+[; ;main.c: 58:         banderas -= 1;
 [e =- _banderas -> -> 1 `i `uc ]
 "59
-[; ;main.c: 59:             buffer = ftoa(datos[0], status);
+[; ;main.c: 59:         buffer = ftoa(datos[0], status);
 [e = _buffer ( _ftoa (2 , *U + &U _datos * -> -> -> 0 `i `ui `ux -> -> # *U &U _datos `ui `ux -> _status `*i ]
 "60
-[; ;main.c: 60:             UARTSendString(buffer, 6);
+[; ;main.c: 60:         UARTSendString(buffer, 6);
 [e ( _UARTSendString (2 , -> _buffer `*Cuc -> -> 6 `i `uc ]
 "62
-[; ;main.c: 62:             buffer = ftoa(datos[1], status);
+[; ;main.c: 62:         buffer = ftoa(datos[1], status);
 [e = _buffer ( _ftoa (2 , *U + &U _datos * -> -> -> 1 `i `ui `ux -> -> # *U &U _datos `ui `ux -> _status `*i ]
 "63
-[; ;main.c: 63:             UARTSendString(" ", 10);
+[; ;main.c: 63:         UARTSendString(" ", 10);
 [e ( _UARTSendString (2 , :s 1C -> -> 10 `i `uc ]
 "64
-[; ;main.c: 64:             UARTSendString(buffer, 6);
+[; ;main.c: 64:         UARTSendString(buffer, 6);
 [e ( _UARTSendString (2 , -> _buffer `*Cuc -> -> 6 `i `uc ]
 "66
-[; ;main.c: 66:             buffer = ftoa(datos[2], status);
+[; ;main.c: 66:         buffer = ftoa(datos[2], status);
 [e = _buffer ( _ftoa (2 , *U + &U _datos * -> -> -> 2 `i `ui `ux -> -> # *U &U _datos `ui `ux -> _status `*i ]
 "67
-[; ;main.c: 67:             UARTSendString(" ", 10);
+[; ;main.c: 67:         UARTSendString(" ", 10);
 [e ( _UARTSendString (2 , :s 2C -> -> 10 `i `uc ]
 "68
-[; ;main.c: 68:             UARTSendString(buffer, 6);
+[; ;main.c: 68:         UARTSendString(buffer, 6);
 [e ( _UARTSendString (2 , -> _buffer `*Cuc -> -> 6 `i `uc ]
 "70
-[; ;main.c: 70:             buffer = ftoa(datos[3], status);
+[; ;main.c: 70:         buffer = ftoa(datos[3], status);
 [e = _buffer ( _ftoa (2 , *U + &U _datos * -> -> -> 3 `i `ui `ux -> -> # *U &U _datos `ui `ux -> _status `*i ]
 "71
-[; ;main.c: 71:             UARTSendString(" ", 10);
+[; ;main.c: 71:         UARTSendString(" ", 10);
 [e ( _UARTSendString (2 , :s 3C -> -> 10 `i `uc ]
 "72
-[; ;main.c: 72:             UARTSendString(buffer, 6);
+[; ;main.c: 72:         UARTSendString(buffer, 6);
 [e ( _UARTSendString (2 , -> _buffer `*Cuc -> -> 6 `i `uc ]
 "74
-[; ;main.c: 74:             buffer = ftoa(datos[4], status);
+[; ;main.c: 74:         buffer = ftoa(datos[4], status);
 [e = _buffer ( _ftoa (2 , *U + &U _datos * -> -> -> 4 `i `ui `ux -> -> # *U &U _datos `ui `ux -> _status `*i ]
 "75
-[; ;main.c: 75:             UARTSendString(" ", 10);
+[; ;main.c: 75:         UARTSendString(" ", 10);
 [e ( _UARTSendString (2 , :s 4C -> -> 10 `i `uc ]
 "76
-[; ;main.c: 76:             UARTSendString(buffer, 6);
+[; ;main.c: 76:         UARTSendString(buffer, 6);
 [e ( _UARTSendString (2 , -> _buffer `*Cuc -> -> 6 `i `uc ]
 "77
-[; ;main.c: 77:             buffer = ftoa(datos[5], status);
+[; ;main.c: 77:         buffer = ftoa(datos[5], status);
 [e = _buffer ( _ftoa (2 , *U + &U _datos * -> -> -> 5 `i `ui `ux -> -> # *U &U _datos `ui `ux -> _status `*i ]
 "78
-[; ;main.c: 78:             UARTSendString(" ", 10);
+[; ;main.c: 78:         UARTSendString(" ", 10);
 [e ( _UARTSendString (2 , :s 5C -> -> 10 `i `uc ]
 "79
-[; ;main.c: 79:             UARTSendString(buffer, 6);
+[; ;main.c: 79:         UARTSendString(buffer, 6);
 [e ( _UARTSendString (2 , -> _buffer `*Cuc -> -> 6 `i `uc ]
 "81
-[; ;main.c: 81:             buffer = ftoa(datos[6], status);
+[; ;main.c: 81:         buffer = ftoa(datos[6], status);
 [e = _buffer ( _ftoa (2 , *U + &U _datos * -> -> -> 6 `i `ui `ux -> -> # *U &U _datos `ui `ux -> _status `*i ]
 "82
-[; ;main.c: 82:             UARTSendString(" ", 10);
+[; ;main.c: 82:         UARTSendString(" ", 10);
 [e ( _UARTSendString (2 , :s 6C -> -> 10 `i `uc ]
 "83
-[; ;main.c: 83:             UARTSendString(buffer, 6);
+[; ;main.c: 83:         UARTSendString(buffer, 6);
 [e ( _UARTSendString (2 , -> _buffer `*Cuc -> -> 6 `i `uc ]
 "85
-[; ;main.c: 85:             UARTSendChar('\n');
+[; ;main.c: 85:         UARTSendChar('\n');
 [e ( _UARTSendChar (1 -> -> 10 `ui `uc ]
-"86
-[; ;main.c: 86:         }
-}
-[e :U 147 ]
 "99
 [; ;main.c: 99:     }
 }
@@ -489,7 +481,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [f ]
 "105
 [; ;main.c: 105:     if (PIR1bits.RCIF) {
-[e $ ! != -> . . _PIR1bits 0 5 `i -> 0 `i 149  ]
+[e $ ! != -> . . _PIR1bits 0 5 `i -> 0 `i 148  ]
 {
 "106
 [; ;main.c: 106:         char entrante = RCREG;
@@ -497,38 +489,38 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _entrante -> _RCREG `uc ]
 "107
 [; ;main.c: 107:         switch (entrante) {
-[e $U 151  ]
+[e $U 150  ]
 {
 "108
 [; ;main.c: 108:             case 'G':
-[e :U 152 ]
+[e :U 151 ]
 "109
 [; ;main.c: 109:                 banderas = banderas | 1;
 [e = _banderas -> | -> _banderas `i -> 1 `i `uc ]
 "110
 [; ;main.c: 110:                 break;
-[e $U 150  ]
+[e $U 149  ]
 "111
 [; ;main.c: 111:             default:
-[e :U 153 ]
+[e :U 152 ]
 "112
 [; ;main.c: 112:                 break;
-[e $U 150  ]
+[e $U 149  ]
 "113
 [; ;main.c: 113:         }
 }
-[e $U 150  ]
-[e :U 151 ]
-[e [\ -> _entrante `i , $ -> -> 71 `ui `i 152
- 153 ]
+[e $U 149  ]
 [e :U 150 ]
+[e [\ -> _entrante `i , $ -> -> 71 `ui `i 151
+ 152 ]
+[e :U 149 ]
 "114
 [; ;main.c: 114:     }
 }
-[e :U 149 ]
+[e :U 148 ]
 "117
 [; ;main.c: 117: }
-[e :UE 148 ]
+[e :UE 147 ]
 }
 [a 1C 32 0 ]
 [a 2C 32 0 ]
