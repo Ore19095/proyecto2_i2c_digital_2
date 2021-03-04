@@ -2967,9 +2967,17 @@ void __attribute__((picinterrupt(("")))) isr() {
     if (PIR1bits.RCIF) {
         char entrante = RCREG;
         switch (entrante) {
-            case 'G':
-                banderas = banderas | 1;
+            case 'A':
+                PORTAbits.RA0 = 1;
                 break;
+            case 'B':
+                PORTAbits.RA0 = 0;
+                break;
+            case 'C':
+                PORTAbits.RA1 = 1;
+                break;
+            case 'D':
+                PORTAbits.RA1 = 0;
             default:
                 break;
         }
