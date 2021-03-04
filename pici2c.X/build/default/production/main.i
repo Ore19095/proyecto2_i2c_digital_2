@@ -2907,24 +2907,19 @@ void readMPU(float*);
 
 
 char banderas = 0;
-float datos[7];
-char* buffer;
-int status;
-
-
-void sendMPU(void);
 
 void main(void) {
-    _delay((unsigned long)((100)*(4000000/4000.0)));
+    _delay((unsigned long)((1000)*(4000000/4000.0)));
     ANSEL = 0;
     TRISA = 0;
     PORTA = 0;
-
+    char* buffer;
 
     I2C_Master_Init();
     UARTInit(19200, 1);
     confMPU();
-
+    int status;
+    float datos[7];
 
     INTCONbits.GIE = 1;
     INTCONbits.PEIE = 1;
@@ -2932,42 +2927,40 @@ void main(void) {
 
     while (1) {
         readMPU(datos);
-        sendMPU();
 
+        if ((banderas & 1) == 1) {
+            banderas -= 1;
+            buffer = ftoa(datos[0], status);
+            UARTSendString(buffer, 6);
 
+            buffer = ftoa(datos[1], status);
+            UARTSendString(" ", 10);
+            UARTSendString(buffer, 6);
+
+            buffer = ftoa(datos[2], status);
+            UARTSendString(" ", 10);
+            UARTSendString(buffer, 6);
+
+            buffer = ftoa(datos[3], status);
+            UARTSendString(" ", 10);
+            UARTSendString(buffer, 6);
+
+            buffer = ftoa(datos[4], status);
+            UARTSendString(" ", 10);
+            UARTSendString(buffer, 6);
+            buffer = ftoa(datos[5], status);
+            UARTSendString(" ", 10);
+            UARTSendString(buffer, 6);
+
+            buffer = ftoa(datos[6], status);
+            UARTSendString(" ", 10);
+            UARTSendString(buffer, 6);
+
+            UARTSendChar('\n');
+        }
+# 99 "main.c"
     }
     return;
-}
-
-
-void sendMPU() {
-    buffer = ftoa(datos[0], status);
-    UARTSendString(buffer, 6);
-
-    buffer = ftoa(datos[1], status);
-    UARTSendString(" ", 10);
-    UARTSendString(buffer, 6);
-
-    buffer = ftoa(datos[2], status);
-    UARTSendString(" ", 10);
-    UARTSendString(buffer, 6);
-
-    buffer = ftoa(datos[3], status);
-    UARTSendString(" ", 10);
-    UARTSendString(buffer, 6);
-
-    buffer = ftoa(datos[4], status);
-    UARTSendString(" ", 10);
-    UARTSendString(buffer, 6);
-    buffer = ftoa(datos[5], status);
-    UARTSendString(" ", 10);
-    UARTSendString(buffer, 6);
-
-    buffer = ftoa(datos[6], status);
-    UARTSendString(" ", 10);
-    UARTSendString(buffer, 6);
-
-    UARTSendChar('\n');
 }
 
 void __attribute__((picinterrupt(("")))) isr() {

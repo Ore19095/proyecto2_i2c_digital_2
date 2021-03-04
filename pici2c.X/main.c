@@ -33,67 +33,71 @@
 
 
 char banderas = 0; //indicar eventos
-float datos[7];
-char* buffer;
-int status;
-
-//prototipos de funciones 
-void sendMPU(void);
 
 void main(void) {
-    __delay_ms(100);
+    __delay_ms(1000);
     ANSEL = 0;
     TRISA = 0;
     PORTA = 0;
-
+    char* buffer;
     //int estado;
     I2C_Master_Init();
     UARTInit(19200, 1);
     confMPU();
-
+    int status;
+    float datos[7];
     // interrupciones
     INTCONbits.GIE = 1;
     INTCONbits.PEIE = 1;
     PIE1bits.RCIE = 1; // se activa
-
+    
     while (1) {
         readMPU(datos);
-        sendMPU();
-      
+
+        if ((banderas & 1) == 1) {
+            banderas -= 1; // se coloca en 0 el 1er bit y se conserban los demas
+            buffer = ftoa(datos[0], status);
+            UARTSendString(buffer, 6); //solo 5 cifras se envian
+
+            buffer = ftoa(datos[1], status);
+            UARTSendString(" ", 10);
+            UARTSendString(buffer, 6);
+
+            buffer = ftoa(datos[2], status);
+            UARTSendString(" ", 10);
+            UARTSendString(buffer, 6);
+
+            buffer = ftoa(datos[3], status);
+            UARTSendString(" ", 10);
+            UARTSendString(buffer, 6);
+
+            buffer = ftoa(datos[4], status);
+            UARTSendString(" ", 10);
+            UARTSendString(buffer, 6);
+            buffer = ftoa(datos[5], status);
+            UARTSendString(" ", 10);
+            UARTSendString(buffer, 6);
+
+            buffer = ftoa(datos[6], status);
+            UARTSendString(" ", 10);
+            UARTSendString(buffer, 6);
+
+            UARTSendChar('\n');
+        }
+
+        //        sprintf(buffer,"Ax: %f ",datos[0]);
+        //        UARTSendString(buffer,15);  
+        //        sprintf(buffer,"Ay: %f ",datos[1]);
+        //        UARTSendString(buffer,15);
+        //        sprintf(buffer,"Az: %f ",datos[2]);
+        //        UARTSendString(buffer,15);
+        //        sprintf(buffer,"Temp: %f ",datos[3]);
+        //        UARTSendString(buffer,15);
+        //        UARTSendChar('\n');
+        //__delay_ms(250);
 
     }
     return;
-}
-// funcion que se encarga de enviar los datos del mpu por uart
-
-void sendMPU() {
-    buffer = ftoa(datos[0], status);
-    UARTSendString(buffer, 6); //solo 5 cifras se envian
-
-    buffer = ftoa(datos[1], status);
-    UARTSendString(" ", 10);
-    UARTSendString(buffer, 6);
-
-    buffer = ftoa(datos[2], status);
-    UARTSendString(" ", 10);
-    UARTSendString(buffer, 6);
-
-    buffer = ftoa(datos[3], status);
-    UARTSendString(" ", 10);
-    UARTSendString(buffer, 6);
-
-    buffer = ftoa(datos[4], status);
-    UARTSendString(" ", 10);
-    UARTSendString(buffer, 6);
-    buffer = ftoa(datos[5], status);
-    UARTSendString(" ", 10);
-    UARTSendString(buffer, 6);
-
-    buffer = ftoa(datos[6], status);
-    UARTSendString(" ", 10);
-    UARTSendString(buffer, 6);
-
-    UARTSendChar('\n');
 }
 
 void __interrupt() isr() {
