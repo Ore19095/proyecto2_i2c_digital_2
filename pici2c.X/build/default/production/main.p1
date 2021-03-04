@@ -76,6 +76,17 @@ Version 4.0 HI-TECH Software Intermediate Code
 "1140
 [; ;D:/programas/mplab5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1140: extern volatile unsigned char RCREG __attribute__((address(0x01A)));
 [v _RCREG `Vuc ~T0 @X0 0 e@26 ]
+"172
+[; ;D:/programas/mplab5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 172:     struct {
+[s S6 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S6 . RA0 RA1 RA2 RA3 RA4 RA5 RA6 RA7 ]
+"171
+[; ;D:/programas/mplab5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 171: typedef union {
+[u S5 `S6 1 ]
+[n S5 . . ]
+"183
+[; ;D:/programas/mplab5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 183: extern volatile PORTAbits_t PORTAbits __attribute__((address(0x005)));
+[v _PORTAbits `VS5 ~T0 @X0 0 e@5 ]
 "8 main.c
 [p x FOSC  =  INTRC_NOCLKOUT ]
 "9
@@ -480,7 +491,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U _isr ]
 [f ]
 "105
-[; ;main.c: 105:     if (PIR1bits.RCIF) {
+[; ;main.c: 105:        if (PIR1bits.RCIF) {
 [e $ ! != -> . . _PIR1bits 0 5 `i -> 0 `i 148  ]
 {
 "106
@@ -492,34 +503,61 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $U 150  ]
 {
 "108
-[; ;main.c: 108:             case 'G':
+[; ;main.c: 108:             case 'A':
 [e :U 151 ]
 "109
-[; ;main.c: 109:                 banderas = banderas | 1;
-[e = _banderas -> | -> _banderas `i -> 1 `i `uc ]
+[; ;main.c: 109:                 PORTAbits.RA0 = 1;
+[e = . . _PORTAbits 0 0 -> -> 1 `i `uc ]
 "110
 [; ;main.c: 110:                 break;
 [e $U 149  ]
 "111
-[; ;main.c: 111:             default:
+[; ;main.c: 111:             case 'B':
 [e :U 152 ]
 "112
-[; ;main.c: 112:                 break;
-[e $U 149  ]
+[; ;main.c: 112:                 PORTAbits.RA0 = 0;
+[e = . . _PORTAbits 0 0 -> -> 0 `i `uc ]
 "113
-[; ;main.c: 113:         }
+[; ;main.c: 113:                 break;
+[e $U 149  ]
+"114
+[; ;main.c: 114:             case 'C':
+[e :U 153 ]
+"115
+[; ;main.c: 115:                 PORTAbits.RA1 = 1;
+[e = . . _PORTAbits 0 1 -> -> 1 `i `uc ]
+"116
+[; ;main.c: 116:                 break;
+[e $U 149  ]
+"117
+[; ;main.c: 117:             case 'D':
+[e :U 154 ]
+"118
+[; ;main.c: 118:                 PORTAbits.RA1 = 0;
+[e = . . _PORTAbits 0 1 -> -> 0 `i `uc ]
+"119
+[; ;main.c: 119:             default:
+[e :U 155 ]
+"120
+[; ;main.c: 120:                 break;
+[e $U 149  ]
+"121
+[; ;main.c: 121:         }
 }
 [e $U 149  ]
 [e :U 150 ]
-[e [\ -> _entrante `i , $ -> -> 71 `ui `i 151
- 152 ]
+[e [\ -> _entrante `i , $ -> -> 65 `ui `i 151
+ , $ -> -> 66 `ui `i 152
+ , $ -> -> 67 `ui `i 153
+ , $ -> -> 68 `ui `i 154
+ 155 ]
 [e :U 149 ]
-"114
-[; ;main.c: 114:     }
+"122
+[; ;main.c: 122:     }
 }
 [e :U 148 ]
-"117
-[; ;main.c: 117: }
+"125
+[; ;main.c: 125: }
 [e :UE 147 ]
 }
 [a 1C 32 0 ]

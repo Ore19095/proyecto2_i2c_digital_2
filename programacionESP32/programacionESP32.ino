@@ -34,14 +34,15 @@ float aX,aY,aZ;
 // Instead, we can use the millis() function to get the current time in
 // milliseconds and avoid publishing until IO_LOOP_DELAY milliseconds have
 // passed.
-#define IO_LOOP_DELAY 6000
+#define IO_LOOP_DELAY 10000
 unsigned long lastUpdate = 0;
 
 // set up the 'counter' feed
 AdafruitIO_Feed *accelx = io.feed("Acelerationx");
 AdafruitIO_Feed *accely = io.feed("Acelerationy");
 AdafruitIO_Feed *accelz = io.feed("Acelerationz");
-
+AdafruitIO_Feed *piloto1 = io.feed("piloto1");
+AdafruitIO_Feed *piloto2 = io.feed("piloto2");
 void setup() {
 
   // start the serial connection
@@ -60,7 +61,8 @@ void setup() {
   // will be called whenever a message is
   // received from adafruit io.
   //counter->onMessage(handleMessage);
-
+  piloto1->onMessage(valorPiloto1);
+  piloto2->onMessage(valorPiloto2);
   // wait for a connection
   while(io.status() < AIO_CONNECTED) {
     Serial.print(".");
@@ -82,10 +84,10 @@ void loop() {
       char entrante = Serial2.read();
       if( entrante != '\n') datos.concat(entrante);
       else{
-        Serial.println(datos);
+        //Serial.println(datos);
         aX = (datos.substring(0,7)).toFloat();
         aY = (datos.substring(7,14)).toFloat();
-        Serial.println(datos.substring(14,21));
+        //Serial.println(datos.substring(14,21));
         aZ = (datos.substring(14,21)).toFloat();
         datos = "";
       }
@@ -128,3 +130,20 @@ void loop() {
   //Serial.println(data->value());
 
 //}
+void valorPiloto1(AdafruitIO_Data *data){
+  Serial.print("received <- ");
+  char* dato=  data->value(); // se obtiene el valor enviado;
+  Serial.println(dato);
+  if(*dato == '1') Serial2.print('A'); //encender luz 1
+  else Serial2.print('B'); // apagar luz 1
+  return;
+}
+
+void valorPiloto2(AdafruitIO_Data *data){
+  Serial.print("received <- ");
+  char* dato=  data->value(); // se obtiene el valor enviado;
+  Serial.println(dato);
+  if(*dato == '1') Serial2.print('C'); //encender luz 2
+  else Serial2.print('D'); // apagar luz 2
+  return;
+}
