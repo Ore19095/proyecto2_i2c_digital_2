@@ -32,10 +32,9 @@
 #include "MPU6050.h"
 
 
-char banderas = 0; //indicar eventos
 
 void main(void) {
-    __delay_ms(1000);
+    //__delay_ms(1000);
     ANSEL = 0;
     TRISA = 0;
     PORTA = 0;
@@ -55,7 +54,7 @@ void main(void) {
         readMPU(datos);
 
 
-        banderas -= 1; // se coloca en 0 el 1er bit y se conserban los demas
+        
         buffer = ftoa(datos[0], status);
         UARTSendString(buffer, 6); //solo 5 cifras se envian
 
